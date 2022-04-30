@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <!-- seccion de imagen de fondo-->
+    <img class="w-50" src="{{usuario.fotofondo}}" alt="" />
+  </div>
+
+  <h1>{{usuario.nombre}}</h1>
+  <div class="row mb-2">
+    <div class="col-lg-3 border border-2 border-primary p-1 mr-2 mb-1 bg-white">
+      <app-profile-side-view [usuario]="usuario"></app-profile-side-view>
+    </div>
+
+    <div class="col border border-2 border-primary bg-white">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/muro" routerLinkActive="active">Muro</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profile" routerLinkActive="active">Perfil</a>
+        </li>
+
+      </ul>
+
+      <app-timeline></app-timeline>
+
+
+    </div>
+  </div>
+</div>

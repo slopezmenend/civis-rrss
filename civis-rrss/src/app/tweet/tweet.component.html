@@ -1,0 +1,46 @@
+<div class="card border-info mb-3">
+  <div class="card-header text-info d-flex justify-content-between">
+    <h5 class="card-title">{{tweet.titulo}}</h5><small class="text-muted">{{tweet.fecha}}</small>
+  </div>
+  <div class="card-body">
+
+
+    <p class="card-text"></p>
+    <p class="card-text">{{tweet.text}}</p>
+
+    <video *ngIf="tweet.video != ''" class="card-img-bottom" id="video" controls preload="metadata">
+      <source src="{{tweet.video}}" type="video/mp4" alt="video">
+      <track label="Español" kind="subtitles" srclang="es" src="{{tweet.subs}}" default>
+    </video>
+
+    <img *ngIf="tweet.image != ''" class="card-img-bottom" src="{{tweet.image}}" alt="imagen" />
+
+    <div class="d-flex justify-content-between">
+      <div id="reacciones">
+        <a href="#"><small class="text-muted">{{tweet.encanta}} <i class="bi bi-heart-fill"
+              alt="me encanta"></i></small></a>
+        <a href="#"><small class="text-muted">{{tweet.gusta}} <i class="bi bi-hand-thumbs-up-fill"
+              alt="me gusta"></i></small></a>
+        <a href="#"><small class="text-muted">{{tweet.igual}} <svg xmlns="http://www.w3.org/2000/svg" width="12"
+              height="12" fill="currentColor" class="bi bi-plus-slash-minus" viewBox="0 0 16 16">
+              <path
+                d="m1.854 14.854 13-13a.5.5 0 0 0-.708-.708l-13 13a.5.5 0 0 0 .708.708ZM4 1a.5.5 0 0 1 .5.5v2h2a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2h-2a.5.5 0 0 1 0-1h2v-2A.5.5 0 0 1 4 1Zm5 11a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5A.5.5 0 0 1 9 12Z" />
+            </svg></small></a>
+        <a href="#"><small class="text-muted">{{tweet.disgusta}}<i class="bi bi-hand-thumbs-down-fill"
+              alt="no me gusta"></i></small></a>
+        <a href="#"><small class="text-muted">{{tweet.odia}} <i class="bi bi-cloud-minus-fill"
+              alt="lo odio"></i></small></a>
+      </div>
+      <div>
+        <a href="#">{{tweet.ncomentarios}} Comentarios</a>
+      </div>
+    </div>
+
+    <form class="mt-2 d-flex justify-content-between">
+      <input type="text" class="form-control flex-grow-1" id="comment" name="comment" aria-describedby="commentHelp"
+        placeholder="Introduzca nombre completo" value="...">
+      <button class="btn btn-info" type="button">Comentar</button>
+    </form>
+
+  </div>
+</div>
