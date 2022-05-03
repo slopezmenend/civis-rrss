@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Tweet } from '../models/Tweet';
+import { Tweet } from '../../models/Tweet';
 
 @Component({
   selector: 'app-tweet',
@@ -14,6 +14,7 @@ export class TweetComponent implements OnInit {
       id: 0,
       fecha: new Date(),
       usuario: 0,
+      padre: 0,
       titulo: '',
       text: '',
       image: '',

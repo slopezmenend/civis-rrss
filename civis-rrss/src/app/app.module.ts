@@ -1,21 +1,28 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TweetComponent } from './tweet/tweet.component';
-import { TimelineComponent } from './timeline/timeline.component';
-import { ProfileFormViewComponent } from './profile-form-view/profile-form-view.component';
-import { ProfileViewComponent } from './profile-view/profile-view.component';
-import { ProfileSideViewComponent } from './profile-side-view/profile-side-view.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { MuroViewComponent } from './muro-view/muro-view.component';
-import { TimelineViewComponent } from './timeline-view/timeline-view.component';
-import { UserlistComponent } from './userlist/userlist.component';
+import { TweetComponent } from './components/tweet/tweet.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
+import { ProfileFormViewComponent } from './components/profile-form-view/profile-form-view.component';
+import { ProfileViewComponent } from './components/profile-view/profile-view.component';
+import { ProfileSideViewComponent } from './components/profile-side-view/profile-side-view.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { MuroViewComponent } from './components/muro-view/muro-view.component';
+import { TimelineViewComponent } from './components/timeline-view/timeline-view.component';
+import { UserlistComponent } from './components/userlist/userlist.component';
 
 // Import the module from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
-import { AuthButtonComponent } from './auth-button/auth-button.component';
+import { AuthButtonComponent } from './components/auth-button/auth-button.component';
+
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { profilereducer } from './store/profile/profile.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ProfileEffects } from './store/profile/profile.effects';
 
 @NgModule({
   declarations: [
@@ -33,12 +40,19 @@ import { AuthButtonComponent } from './auth-button/auth-button.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     // Import the module into the application, with configuration
     AuthModule.forRoot({
       domain: 'dev-3knlgbm1.us.auth0.com',
       clientId: 'tUwbY67kocLQxV4vjBinKwZnfA2yky6j'
     }),
+    StoreModule.forRoot({ profile: profilereducer }),
+    StoreDevtoolsModule.instrument({
+      name: 'NgRx Civis App',
+      maxAge: 15, // Retains last 15 states
+    }),
+    EffectsModule.forRoot([ProfileEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

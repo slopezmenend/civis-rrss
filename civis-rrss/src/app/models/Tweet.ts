@@ -4,6 +4,7 @@ export interface Tweet {
   id: number;
   fecha: Date;
   usuario: number;
+  padre: number;
   titulo: string;
   text: string;
   image: string;

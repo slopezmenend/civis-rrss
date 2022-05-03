@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MuroViewComponent } from './muro-view/muro-view.component';
-import { ProfileViewComponent } from './profile-view/profile-view.component';
-import { TimelineViewComponent } from './timeline-view/timeline-view.component';
-import { UserlistComponent } from './userlist/userlist.component';
+import { MuroViewComponent } from './components/muro-view/muro-view.component';
+import { ProfileViewComponent } from './components/profile-view/profile-view.component';
+import { TimelineViewComponent } from './components/timeline-view/timeline-view.component';
+import { UserlistComponent } from './components/userlist/userlist.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileViewComponent },
