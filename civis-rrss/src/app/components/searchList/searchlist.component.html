@@ -1,4 +1,4 @@
-<div>{{len}} usuarios encontrados con el patrón de búsqueda "XXXXX"</div>
+<div>{{len}} usuarios encontrados con el patrón de búsqueda "{{pattern}}"</div>
 <div class="container d-flex">
   <div *ngFor="let profile of profiles">
     <app-userdetail [profile]="profile"></app-userdetail>

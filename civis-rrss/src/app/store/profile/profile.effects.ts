@@ -4,23 +4,40 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { BackendService } from 'src/app/services/backend.service';
-import { GetProfileFail, GetProfileSuccess, ProfileActionTypes } from './profile.actions';
+import { GetProfileFail, GetProfileSuccess, PostFollowFail, PostFollowSuccess, PostUnFollowFail, PostUnFollowSuccess, ProfileActionTypes } from './profile.actions';
 
 @Injectable()
 export class ProfileEffects {
 
   loadProfile$ = createEffect(() => this.actions$.pipe(
     ofType(ProfileActionTypes.GetProfileLoad),
-    mergeMap(() => this.backendService.getPerfil()
+    mergeMap(({user_id}) => this.backendService.getPerfil(user_id)
       .pipe(
-        map((data) => GetProfileSuccess ({ data: data})),
-        catchError((err) => of(GetProfileFail({ payload: err})))
-        /*map(profile => ({ type: ProfileActionTypes.GetProfileSuccess, payload: profile, data: profile })),
-        catchError((err) => EMPTY)*/
+        map((data) => GetProfileSuccess ({ data: data.data, seguido: true })),
+        catchError((data) => of(GetProfileFail({ payload: data.message})))
       )
     )
   ));
 
+  follow$ = createEffect(() => this.actions$.pipe(
+    ofType(ProfileActionTypes.PostFollow),
+    mergeMap(({user_id, seguidor_id}) => this.backendService.postFollow(user_id, seguidor_id)
+      .pipe(
+        map((data) => PostFollowSuccess ({ data: data.data, seguido: true })),
+        catchError((data) => of(PostFollowFail({ payload: data.message})))
+      )
+    )
+  ));
+
+  unfollow$ = createEffect(() => this.actions$.pipe(
+    ofType(ProfileActionTypes.PostUnFollow),
+    mergeMap(({user_id, seguidor_id}) => this.backendService.deleteFollow(user_id, seguidor_id)
+      .pipe(
+        map((data) => PostUnFollowSuccess ({ data: data.data, seguido: false })),
+        catchError((data) => of(PostUnFollowFail({ payload: data.message})))
+      )
+    )
+  ));
   constructor(
     private actions$: Actions,
     private backendService: BackendService

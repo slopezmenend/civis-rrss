@@ -6,23 +6,22 @@ export enum ProfileActionTypes {
     GetProfileLoad = '[Profile] Get Profile',
     GetProfileSuccess = '[Profile] Get Profile Success',
     GetProfileFail = '[Profile] Get Profile Fail',
-    PostProfile = '[Profile] Post Profile',
-    PostProfileSuccess = '[Profile] Post Profile Success',
-    PostProfileFail = '[Profile] Post Profile Fail',
+    PostFollow = '[Profile] Follow',
+    PostFollowSuccess = '[Profile] Follow Success',
+    PostFollowFail = '[Profile] Follow Fail',
+    PostUnFollow = '[Profile] UnFollow',
+    PostUnFollowSuccess = '[Profile] UnFollow Success',
+    PostUnFollowFail = '[Profile] UnFollow Fail',
 }
 
-
-/*export class GetProfileLoad implements Action {
-    public readonly type = ProfileActionTypes.GetProfileLoad;
-}*/
-
 export const GetProfileLoad = createAction(
-  ProfileActionTypes.GetProfileLoad
+  ProfileActionTypes.GetProfileLoad,
+  props < {user_id: number}>()
 );
 
 export const GetProfileSuccess = createAction(
   ProfileActionTypes.GetProfileSuccess,
-  props < {data: User}>()
+  props < {data: User, seguido: boolean}>()
 );
 
 export const GetProfileFail = createAction(
@@ -30,35 +29,32 @@ export const GetProfileFail = createAction(
   props <{payload: any}>()
 );
 
-/*
-export class GetProfileSuccess implements Action {
-    public readonly type = ProfileActionTypes.GetProfileSuccess;
+export const PostFollow = createAction(
+  ProfileActionTypes.PostFollow,
+  props < {user_id: number, seguidor_id:number }>()
+);
 
-    constructor(public payload: User) { }
-}
+export const PostFollowSuccess = createAction(
+  ProfileActionTypes.PostFollowSuccess,
+  props < {data: User, seguido: boolean}>()
+);
 
-export class GetProfileFail implements Action {
-    public readonly type = ProfileActionTypes.GetProfileFail;
+export const PostFollowFail = createAction(
+  ProfileActionTypes.PostFollowFail,
+  props <{payload: any}>()
+);
 
-    constructor(public error: HttpErrorResponse) { }
-}*/
+export const PostUnFollow = createAction(
+  ProfileActionTypes.PostUnFollow,
+  props < {user_id: number, seguidor_id: number}>()
+);
 
-/*export class PostProfile implements Action {
-    public readonly type = ProfileActionTypes.PostProfile;
+export const PostUnFollowSuccess = createAction(
+  ProfileActionTypes.PostUnFollowSuccess,
+  props < {data: User, seguido: boolean}>()
+);
 
-    constructor(public payload: User) { }
-}
-
-export class PostProfileSuccess implements Action {
-    public readonly type = ProfileActionTypes.PostProfileSuccess;
-
-    constructor(public payload: User) { }
-}
-
-export class PostProfileFail implements Action {
-    public readonly type = ProfileActionTypes.PostProfileFail;
-
-    constructor(){} //public error: HttpErrorResponse) { }
-}*/
-
-//export type ProfileActions = GetProfileLoad | GetProfileSuccess | GetProfileFail;
+export const PostUnFollowFail = createAction(
+  ProfileActionTypes.PostUnFollowFail,
+  props <{payload: any}>()
+);

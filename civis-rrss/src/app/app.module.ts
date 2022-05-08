@@ -23,6 +23,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { profilereducer } from './store/profile/profile.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProfileEffects } from './store/profile/profile.effects';
+import { appReducers, EffectsArray } from './store/AppState';
+import { UserdetailComponent } from './components/userdetail/userdetail.component';
+import { SearchListComponent } from './components/searchList/searchlist.component';
+import { MyprofileViewComponent } from './components/myprofile-view/myprofile-view.component';
+import { MymuroViewComponent } from './components/mymuro-view/mymuro-view.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,11 @@ import { ProfileEffects } from './store/profile/profile.effects';
     MuroViewComponent,
     TimelineViewComponent,
     UserlistComponent,
-    AuthButtonComponent
+    SearchListComponent,
+    AuthButtonComponent,
+    UserdetailComponent,
+    MyprofileViewComponent,
+    MymuroViewComponent
   ],
   imports: [
     BrowserModule,
@@ -47,12 +56,14 @@ import { ProfileEffects } from './store/profile/profile.effects';
       domain: 'dev-3knlgbm1.us.auth0.com',
       clientId: 'tUwbY67kocLQxV4vjBinKwZnfA2yky6j'
     }),
-    StoreModule.forRoot({ profile: profilereducer }),
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot(EffectsArray),
+    //StoreModule.forRoot({ profile: profilereducer }),
     StoreDevtoolsModule.instrument({
       name: 'NgRx Civis App',
       maxAge: 15, // Retains last 15 states
     }),
-    EffectsModule.forRoot([ProfileEffects])
+    //EffectsModule.forRoot([ProfileEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

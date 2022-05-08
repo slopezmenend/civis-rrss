@@ -1,7 +1,7 @@
-<div *ngIf="usuario!== undefined" class="container">
+<div class="container">
   <div class="d-flex justify-content-center">
     <!-- seccion de imagen de fondo-->
-    <img *ngIf="usuario.fotofondo != ''" class="w-50" src="{{usuario.fotofondo}}" alt="" />
+    <img class="w-50" src="{{usuario.fotofondo}}" alt="" />
   </div>
 
   <h1>{{usuario.nombre}}</h1>
@@ -13,15 +13,16 @@
     <div class="col border border-2 border-primary bg-white">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/muro', id]" routerLinkActive="active">Muro</a>
+          <a class="nav-link active" [routerLink]="['/mymuro']" routerLinkActive="active">Muro</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" [routerLink]="['/profile', id]" routerLinkActive="active">Perfil</a>
+          <a class="nav-link" [routerLink]="['/myprofile']" routerLinkActive="active">Perfil</a>
         </li>
 
       </ul>
 
-      <app-profile-form-view></app-profile-form-view>
+      <app-timeline></app-timeline>
+
 
     </div>
   </div>

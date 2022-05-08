@@ -21,3 +21,51 @@ export interface User {
   ideologia: number;
   ideologiaadicional: number;
 }
+
+export const initialUser:User =
+{
+  id: 0,
+  fotoperfil: '',
+  idcivis: 0,
+  following: 0,
+  followers: 0,
+  web: '',
+  facebook: '',
+  twitter: '',
+  instagram: '',
+  youtube: '',
+  email: '',
+  nombre: '',
+  fotofondo: '',
+  circunscripcion: '',
+  partido: '',
+  grupo: '',
+  biografia: '',
+  ideologia: 0,
+  ideologiaadicional: 0,
+};
+
+export interface IUser {
+  data: User;
+  message: any
+}
+
+export interface IprofileList {
+  current_page: number
+  data: User[],
+  first_page_url: string
+  from: any
+  last_page: number
+  last_page_url: string,
+  links: string[],
+  next_page_url: any
+  path: string
+  per_page: number
+  prev_page_url: any,
+  to: any,
+  total: number,
+}
+export interface IProfiles {
+  data: IprofileList,
+  message: any,
+}

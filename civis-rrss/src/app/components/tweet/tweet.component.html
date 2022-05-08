@@ -6,7 +6,8 @@
 
 
     <p class="card-text"></p>
-    <p class="card-text">{{tweet.text}}</p>
+    <p class="card-text">{{tweet.text}} <a *ngIf="tweet.enlace!=null && tweet.enlace!=''" href="{{tweet.enlace}}">Enlace
+        a la intervencion en PDF</a></p>
 
     <video *ngIf="tweet.video != ''" class="card-img-bottom" id="video" controls preload="metadata">
       <source src="{{tweet.video}}" type="video/mp4" alt="video">

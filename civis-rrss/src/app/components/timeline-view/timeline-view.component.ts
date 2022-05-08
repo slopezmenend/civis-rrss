@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimelineViewComponent implements OnInit {
 
-  constructor() { }
+  constructor() { console.log ("Entrando en Timeline view");}
 
   ngOnInit(): void {
   }

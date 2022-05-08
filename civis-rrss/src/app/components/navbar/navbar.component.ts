@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onSubmit() {
-
+    this.router.navigateByUrl('/search/');
   }
 
 }

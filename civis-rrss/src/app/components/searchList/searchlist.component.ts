@@ -1,21 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { User } from 'src/app/models/User';
 import { IAppState } from 'src/app/store/AppState';
 import { GetProfileLoad } from 'src/app/store/profile/profile.actions';
 import { SearchProfilesLoad } from 'src/app/store/profiles/profiles.actions';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-userlist',
-  templateUrl: './userlist.component.html',
-  styleUrls: ['./userlist.component.scss']
+  selector: 'app-searchlist',
+  templateUrl: './searchlist.component.html',
+  styleUrls: ['./searchlist.component.scss']
 })
-export class UserlistComponent implements OnInit {
+
+export class SearchListComponent implements OnInit {
   public profiles:User[] = [];
   public len:number = 0;
+  public pattern:string = '';
 
-  constructor(private store:Store<IAppState>) {
+  constructor(private store:Store<IAppState>, private route: ActivatedRoute) {
+    this.route.queryParams
+      .subscribe(params => {
+        console.log(params); // { orderby: "price" }
+        this.pattern = params.search;
+        console.log(this.pattern); // price
+        this.store.dispatch(SearchProfilesLoad({pattern:this.pattern}));
+      }
+    );
 
     console.log ("Cargado listado perfiles inicial" , this.profiles);
     this.store.select ('profiles').subscribe (profiles =>
@@ -25,9 +35,7 @@ export class UserlistComponent implements OnInit {
         this.len = this.profiles.length;
         console.log ("Recuperados perfiles: ", this.profiles);
       });
-
-      this.store.dispatch(SearchProfilesLoad({pattern:'Abascal'}));
-  }
+    }
 
   ngOnInit(): void {
   }

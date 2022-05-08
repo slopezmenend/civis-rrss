@@ -1,3 +1,4 @@
-<div>
+<div *ngIf="tweets != undefined && len != 0">
   <app-tweet *ngFor="let tweet of tweets" [tweet]="tweet"></app-tweet>
 </div>
+<div *ngIf="tweets == undefined || len == 0">No hay elementos a mostrar</div>
