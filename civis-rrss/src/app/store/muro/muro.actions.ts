@@ -10,7 +10,7 @@ export enum MuroActionTypes {
 
 export const GetMuroLoad = createAction(
   MuroActionTypes.GetMuroLoad,
-  props <{user_id:number}>()
+  props <{user_id:number, page:number}>()
 );
 
 export const GetMuroSuccess = createAction(

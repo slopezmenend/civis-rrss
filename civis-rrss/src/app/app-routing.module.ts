@@ -6,20 +6,22 @@ import { MyprofileViewComponent } from './components/myprofile-view/myprofile-vi
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 import { SearchListComponent } from './components/searchList/searchlist.component';
 import { TimelineViewComponent } from './components/timeline-view/timeline-view.component';
+import {AuthGuard} from '@auth0/auth0-angular';
 
 
 
 
 
 const routes: Routes = [
-  { path: 'profile/:id', component: ProfileViewComponent },
-  { path: 'muro/:id', component: MuroViewComponent },
-  { path: 'myprofile', component: MyprofileViewComponent },
-  { path: 'mymuro', component: MymuroViewComponent },
-  { path: 'timeline', component: TimelineViewComponent },
-  { path: 'search', component: SearchListComponent},
-  { path: '**', component: TimelineViewComponent },
-];
+  { path: 'profile/:id', component: ProfileViewComponent, canActivate: [AuthGuard] },
+  { path: 'muro/:id', component: MuroViewComponent, canActivate: [AuthGuard] },
+  { path: 'myprofile', component: MyprofileViewComponent, canActivate: [AuthGuard] },
+  { path: 'mymuro', component: MymuroViewComponent, canActivate: [AuthGuard] },
+  { path: 'timeline', component: TimelineViewComponent, canActivate: [AuthGuard] },
+  { path: 'search', component: SearchListComponent, canActivate: [AuthGuard]},
+  { path: 'welcome', component: TimelineViewComponent},
+  { path: '**', component: TimelineViewComponent},
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

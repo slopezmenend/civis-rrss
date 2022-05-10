@@ -25,7 +25,8 @@ export class MymuroViewComponent implements OnInit {
       });
       //this.route.params.subscribe(params => {
         //this.id = +params['id']; // (+) converts string 'id' to a number
-        this.store.dispatch(GetProfileLoad({user_id: this.id}));
+        console.log ("En mymuro el id tiene valor:", this.id);
+    this.store.dispatch(GetProfileLoad({user_id: this.id}));
      //});
   }
 

@@ -10,6 +10,7 @@ export interface ITimelineState {
     user_id: number;
     data: Tweet[];
     isLoading: boolean;
+    page: number;
     message: string;
 }
 
@@ -17,15 +18,16 @@ export const initialState: ITimelineState = {
     user_id: 0,
     data: initialTimeline,
     isLoading: false,
+    page: 1,
     message: ''
 };
 
 const _timelinereducer = createReducer (
   initialState,
-  on (GetTimelineLoad, (state, {user_id}) => ( { ...state , user_id: user_id, isLoading:true})),
+  on (GetTimelineLoad, (state, {user_id, page}) => ( { ...state , user_id: user_id, isLoading:true, page: state.page+1})),
   on (GetTimelineSuccess, ( state, {data} ) => (
       console.log (data),
-    { ...state , isLoading:false, message: 'Muro cargado correctamente!', data: data})
+    { ...state , isLoading:false, message: 'Muro cargado correctamente!', data: state.data.concat(data)})
     ),
   on (GetTimelineFail, ( state, {payload} ) => (
     { ...initialState , isLoading:false, message: payload}))

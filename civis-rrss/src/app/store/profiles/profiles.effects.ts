@@ -13,7 +13,7 @@ export class ProfilesEffects {
 
   loadProfiles$ = createEffect(() => this.actions$.pipe(
     ofType(ProfilesActionTypes.SearchProfilesLoad),
-    mergeMap(({pattern}) => this.backendService.searchUser(pattern)
+    mergeMap(({pattern}) => this.backendService.searchUser(pattern, 365)
       .pipe(
         map((data) => (
           console.log ("Datos:", data, data.data.data),

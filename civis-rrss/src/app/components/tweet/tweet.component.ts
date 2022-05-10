@@ -7,10 +7,11 @@ import { initialTweet, Tweet } from '../../models/Tweet';
   styleUrls: ['./tweet.component.scss']
 })
 export class TweetComponent implements OnInit {
-  @Input() tweet:Tweet;
+  @Input() tweet:Tweet = initialTweet;
+  //public user_id:number;
 
   constructor() {
-    this.tweet = initialTweet;
+    //this.user_id = this.tweet.seguido_id;
   }
 
   ngOnInit(): void {

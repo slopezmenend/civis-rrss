@@ -10,6 +10,7 @@ export interface IMuroState {
     user_id: number;
     data: Tweet[];
     isLoading: boolean;
+    page:number;
     message: string;
 }
 
@@ -17,15 +18,16 @@ export const initialState: IMuroState = {
     user_id: 0,
     data: initialMuro,
     isLoading: false,
+    page:1,
     message: ''
 };
 
 const _muroreducer = createReducer (
   initialState,
-  on (GetMuroLoad, (state, {user_id}) => ( { ...state , user_id: user_id, isLoading:true})),
+  on (GetMuroLoad, (state, {user_id}) => ( { ...state , user_id: user_id, isLoading:true, page:state.page+1})),
   on (GetMuroSuccess, ( state, {data} ) => (
       console.log (data),
-    { ...state , isLoading:false, message: 'Muro cargado correctamente!', data: data})
+    { ...state , isLoading:false, message: 'Muro cargado correctamente!', data: state.data.concat(data)})
     ),
   on (GetMuroFail, ( state, {payload} ) => (
     { ...initialState , isLoading:false, message: payload}))

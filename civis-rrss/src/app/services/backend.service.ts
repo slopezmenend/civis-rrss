@@ -22,27 +22,31 @@ export class BackendService {
     return <Observable<IUser>>perfil;
   }
 
-  public getMuro ($user_id:number): Observable<ITweet>
+  public getMuro ($user_id:number, $page:number): Observable<ITweet>
   {
-    const url = 'http://127.0.0.1:8000/api/muro/' + $user_id;
+    let url = 'http://127.0.0.1:8000/api/muro/' + $user_id;
+    if ($page != 0)
+      url = url + '?page=' + $page;
     console.log ("vamos a recuperar muro de " ,  url);
     let muro = this.http.get(url);
     console.log(muro);
     return <Observable<ITweet>>muro;
   }
 
-  public searchUser ($pattern:string): Observable<IProfiles>
+  public searchUser ($pattern:string, $user_id:number): Observable<IProfiles>
   {
-    const url = 'http://127.0.0.1:8000/api/searchuser/' + $pattern;
+    const url = 'http://127.0.0.1:8000/api/searchuser/' + $pattern+ '/'+$user_id;
     console.log ("vamos a recuperar profiles de " ,  url);
     let profiles = this.http.get(url);
     console.log(profiles);
     return <Observable<IProfiles>>profiles;
   }
 
-  public getTimeline ($user_id:number): Observable<ITweet>
+  public getTimeline ($user_id:number, $page:number): Observable<ITweet>
   {
-    const url = 'http://127.0.0.1:8000/api/timeline/' + $user_id;
+    let url = 'http://127.0.0.1:8000/api/timeline/' + $user_id;
+    if ($page != 0)
+      url = url + '?page=' + $page;
     console.log ("vamos a recuperar muro de " ,  url);
     let muro = this.http.get(url);
     console.log(muro);

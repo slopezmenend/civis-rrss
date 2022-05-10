@@ -16,13 +16,14 @@ export class SearchListComponent implements OnInit {
   public profiles:User[] = [];
   public len:number = 0;
   public pattern:string = '';
+  public cargando:boolean = false;
 
   constructor(private store:Store<IAppState>, private route: ActivatedRoute) {
     this.route.queryParams
       .subscribe(params => {
-        console.log(params); // { orderby: "price" }
+        console.log(params);
         this.pattern = params.search;
-        console.log(this.pattern); // price
+        console.log(this.pattern);
         this.store.dispatch(SearchProfilesLoad({pattern:this.pattern}));
       }
     );
@@ -31,6 +32,7 @@ export class SearchListComponent implements OnInit {
     this.store.select ('profiles').subscribe (profiles =>
       {
         console.log (profiles);
+        this.cargando = profiles.isLoading;
         this.profiles = profiles.data;
         this.len = this.profiles.length;
         console.log ("Recuperados perfiles: ", this.profiles);

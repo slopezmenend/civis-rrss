@@ -28,6 +28,8 @@ import { UserdetailComponent } from './components/userdetail/userdetail.componen
 import { SearchListComponent } from './components/searchList/searchlist.component';
 import { MyprofileViewComponent } from './components/myprofile-view/myprofile-view.component';
 import { MymuroViewComponent } from './components/mymuro-view/mymuro-view.component';
+import { MurolistComponent } from './components/murolist/murolist.component';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { MymuroViewComponent } from './components/mymuro-view/mymuro-view.compon
     AuthButtonComponent,
     UserdetailComponent,
     MyprofileViewComponent,
-    MymuroViewComponent
+    MymuroViewComponent,
+    MurolistComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -63,6 +67,7 @@ import { MymuroViewComponent } from './components/mymuro-view/mymuro-view.compon
       name: 'NgRx Civis App',
       maxAge: 15, // Retains last 15 states
     }),
+    InfiniteScrollModule,
     //EffectsModule.forRoot([ProfileEffects])
   ],
   providers: [],

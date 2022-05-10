@@ -18,7 +18,7 @@ export enum TimelineActionTypes {
 
 export const GetTimelineLoad = createAction(
   TimelineActionTypes.GetTimelineLoad,
-  props <{user_id:number}>()
+  props <{user_id:number, page:number}>()
 );
 
 export const GetTimelineSuccess = createAction(

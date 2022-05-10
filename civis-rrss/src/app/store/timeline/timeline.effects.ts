@@ -13,7 +13,7 @@ export class TimelineEffects {
 
   loadTimeline$ = createEffect(() => this.actions$.pipe(
     ofType(TimelineActionTypes.GetTimelineLoad),
-    mergeMap(({user_id}) => this.backendService.getMuro(user_id)
+    mergeMap(({user_id, page}) => this.backendService.getTimeline(user_id, page)
       .pipe(
         map((data) => (
           console.log ("Datos:", data, data.data.data),

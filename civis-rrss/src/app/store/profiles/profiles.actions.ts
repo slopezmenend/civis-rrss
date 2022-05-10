@@ -7,6 +7,12 @@ export enum ProfilesActionTypes {
     SearchProfilesLoad = '[Profiles] Search Profiles',
     SearchProfilesSuccess = '[Timeline] Search Profiles Success',
     SearchProfilesFail = '[Timeline] Search Profiles Fail',
+    GetFollowingLoad = '[Profiles] Get Following',
+    GetFollowingSuccess = '[Timeline] Get Following Success',
+    GetFollowingFail = '[Timeline] Get Following Fail',
+    GetFollowersLoad = '[Profiles] Get Followers',
+    GetFollowersSuccess = '[Timeline] Get Followers Success',
+    GetFollowersFail = '[Timeline] Get Followers Fail',
 }
 
 
@@ -26,6 +32,36 @@ export const SearchProfilesSuccess = createAction(
 
 export const SearchProfilesFail = createAction(
   ProfilesActionTypes.SearchProfilesFail,
+  props <{payload: any}>()
+);
+
+export const GetFollowingLoad = createAction(
+  ProfilesActionTypes.GetFollowingLoad,
+  props <{pattern:string}>()
+);
+
+export const GetFollowingSuccess = createAction(
+  ProfilesActionTypes.GetFollowingSuccess,
+  props < {data: User[]}>()
+);
+
+export const GetFollowingFail = createAction(
+  ProfilesActionTypes.GetFollowingFail,
+  props <{payload: any}>()
+);
+
+export const GetFollowersLoad = createAction(
+  ProfilesActionTypes.GetFollowersLoad,
+  props <{pattern:string}>()
+);
+
+export const GetFollowersSuccess = createAction(
+  ProfilesActionTypes.GetFollowersSuccess,
+  props < {data: User[]}>()
+);
+
+export const GetFollowersFail = createAction(
+  ProfilesActionTypes.GetFollowersFail,
   props <{payload: any}>()
 );
 

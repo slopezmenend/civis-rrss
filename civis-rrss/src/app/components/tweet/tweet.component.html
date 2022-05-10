@@ -1,6 +1,8 @@
 <div class="card border-info mb-3">
-  <div class="card-header text-info d-flex justify-content-between">
-    <h5 class="card-title">{{tweet.titulo}}</h5><small class="text-muted">{{tweet.fecha}}</small>
+  <div class="card-header text-info d-flex align-items-center">
+    <a [routerLink]="['/profile', tweet.user_id]"><img [src]="tweet.fotoperfil" width="50" height="50"
+        class="border border-white rounded-circle border-4"></a>
+    <h5 class="card-title ml-2">{{tweet.name}}: {{tweet.titulo}}</h5>
   </div>
   <div class="card-body">
 

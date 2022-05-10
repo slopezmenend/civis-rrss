@@ -15,10 +15,11 @@ export class UserdetailComponent implements OnInit {
   public siguiendo:boolean = false;
 
   constructor(private store:Store<IAppState>) {
-    this.profile = initialUser;
   }
 
   ngOnInit(): void {
+    this.siguiendo = this.profile.seguido_id != null;
+    console.log ("Pintando el usuario del listado", this.profile, this.siguiendo);
   }
 
   onFollowClick ()

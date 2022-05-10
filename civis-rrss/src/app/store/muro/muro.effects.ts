@@ -13,7 +13,7 @@ export class MuroEffects {
 
   loadMuro$ = createEffect(() => this.actions$.pipe(
     ofType(MuroActionTypes.GetMuroLoad),
-    mergeMap(({user_id}) => this.backendService.getMuro(user_id)
+    mergeMap(({user_id, page}) => this.backendService.getMuro(user_id, page)
       .pipe(
         map((data) => (
           console.log ("Datos:", data, data.data.data),

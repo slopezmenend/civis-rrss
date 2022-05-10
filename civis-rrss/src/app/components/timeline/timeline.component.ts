@@ -15,6 +15,8 @@ export class TimelineComponent implements OnInit {
 
   public tweets:Tweet[] = [];
   public len:number = 0;
+  public cargando:boolean = false;
+  public page:number = 0;
 
   constructor(private store:Store<IAppState>, private route:ActivatedRoute) {
     console.log ("Cargado muro inicial" , this.tweets);
@@ -23,17 +25,29 @@ export class TimelineComponent implements OnInit {
         console.log (timeline);
         this.tweets = timeline.data;
         this.len = this.tweets.length;
+        this.cargando = timeline.isLoading;
         console.log ("Recuperados tweets: ", this.tweets);
+        this.page = timeline.page;
       });
 
-    this.route.params.subscribe(params => {
-        let user_id = +params['id']; // (+) converts string 'id' to a number
-        this.store.dispatch(GetTimelineLoad({user_id: user_id}));
-     });
+      this.loadTimeline ();
+    //this.route.params.subscribe(params => {
+    //    let user_id = +params['id']; // (+) converts string 'id' to a number
+
+     //});
 
   }
 
   ngOnInit(): void {
+  }
+
+  loadTimeline ()
+  {
+    this.store.dispatch(GetTimelineLoad({user_id: 365, page:this.page}));
+  }
+
+  onScroll() {
+    this.loadTimeline();
   }
 
 }
