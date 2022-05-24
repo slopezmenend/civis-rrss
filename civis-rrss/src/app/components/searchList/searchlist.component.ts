@@ -24,9 +24,14 @@ export class SearchListComponent implements OnInit {
         console.log(params);
         this.pattern = params.search;
         console.log(this.pattern);
-        this.store.dispatch(SearchProfilesLoad({pattern:this.pattern}));
       }
     );
+
+    this.store.select('profile').subscribe (profile =>
+      {
+        let id = profile.user_id;
+        this.store.dispatch(SearchProfilesLoad({pattern:this.pattern, user_id:id}));
+      })
 
     console.log ("Cargado listado perfiles inicial" , this.profiles);
     this.store.select ('profiles').subscribe (profiles =>

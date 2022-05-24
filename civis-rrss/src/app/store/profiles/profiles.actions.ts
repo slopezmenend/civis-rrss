@@ -22,7 +22,7 @@ export enum ProfilesActionTypes {
 
 export const SearchProfilesLoad = createAction(
   ProfilesActionTypes.SearchProfilesLoad,
-  props <{pattern:string}>()
+  props <{pattern:string, user_id:number}>()
 );
 
 export const SearchProfilesSuccess = createAction(
@@ -37,7 +37,7 @@ export const SearchProfilesFail = createAction(
 
 export const GetFollowingLoad = createAction(
   ProfilesActionTypes.GetFollowingLoad,
-  props <{pattern:string}>()
+  props < {user_id:number}>()
 );
 
 export const GetFollowingSuccess = createAction(
@@ -52,7 +52,7 @@ export const GetFollowingFail = createAction(
 
 export const GetFollowersLoad = createAction(
   ProfilesActionTypes.GetFollowersLoad,
-  props <{pattern:string}>()
+  props < {user_id:number}>()
 );
 
 export const GetFollowersSuccess = createAction(
@@ -64,6 +64,8 @@ export const GetFollowersFail = createAction(
   ProfilesActionTypes.GetFollowersFail,
   props <{payload: any}>()
 );
+
+
 
 /*
 export class GetTimelineSuccess implements Action {

@@ -30,6 +30,10 @@ import { MyprofileViewComponent } from './components/myprofile-view/myprofile-vi
 import { MymuroViewComponent } from './components/mymuro-view/mymuro-view.component';
 import { MurolistComponent } from './components/murolist/murolist.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import { FollowinglistComponent } from './followinglist/followinglist.component';
+import { FollowerlistComponent } from './followerlist/followerlist.component';
+import { ComentarformComponent } from './components/comentarform/comentarform.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -49,6 +53,9 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
     MyprofileViewComponent,
     MymuroViewComponent,
     MurolistComponent,
+    FollowinglistComponent,
+    FollowerlistComponent,
+    ComentarformComponent,
 
   ],
   imports: [
@@ -69,6 +76,7 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
     }),
     InfiniteScrollModule,
     //EffectsModule.forRoot([ProfileEffects])
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

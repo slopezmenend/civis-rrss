@@ -19,8 +19,10 @@ export class ProfileSideViewComponent implements OnInit {
     this.store.select ('profile').subscribe (profile =>
       {
         this.usuario = profile.data;
-        this.seguido = profile.seguido;
+        this.seguido = this.usuario.follows != null;//profile.seguido;
         console.log (this.usuario);
+        console.log ("En el panel lateral era seguido: ", this.seguido);
+        console.log (profile);
     });
     //this.store.dispatch(GetProfileLoad());
   }

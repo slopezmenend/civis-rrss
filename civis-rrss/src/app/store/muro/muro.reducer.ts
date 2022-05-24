@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { Tweet } from 'src/app/models/Tweet';
 import { User } from 'src/app/models/User';
 import { IAppState } from '../AppState';
-import { GetMuroLoad, GetMuroSuccess, GetMuroFail}  from './muro.actions';
+import { GetMuroLoad, GetMuroSuccess, GetMuroFail, crearComentario, crearComentarioFail, crearComentarioSuccess, añadirComentario, sumarComentario}  from './muro.actions';
 
 export const initialMuro:Tweet[] = [];
 
@@ -30,7 +30,29 @@ const _muroreducer = createReducer (
     { ...state , isLoading:false, message: 'Muro cargado correctamente!', data: state.data.concat(data)})
     ),
   on (GetMuroFail, ( state, {payload} ) => (
-    { ...initialState , isLoading:false, message: payload}))
+    { ...initialState , isLoading:false, message: payload})),
+    on (crearComentario, (state, {$user_id, $parent_id, $titulo, $texto}) => ( { ...state , isLoading:true})),
+    on (crearComentarioSuccess, ( state ) => (
+      { ...state , isLoading:false, message: 'Comentario creado correctamente!'})
+      ),
+    on (crearComentarioFail, ( state, {payload} ) => (
+      { ...initialState , isLoading:false, message: payload})),
+    on (añadirComentario, ( state, {tweet} ) => (
+        console.log ("Añadiendo el tweet: ", tweet, state.data),
+      { ...state , message: 'Comentario añadido correctamente!', data: [tweet].concat(state.data)}),
+      //console.log ("Añadido el tweet: ", state.data),
+      ),
+    on (sumarComentario, ( state, {parent_id} ) => (
+      console.log ("Actualizando contador comentarios de post ", parent_id),
+    { ...state , message: 'Comentario sumado correctamente!', data: state.data.map (
+      function (comentario) {
+        /*let comm = <Tweet> comentario;
+        console.log ("Pintando elemento", comm, " con ", comm.ncomentarios);
+        comm.ncomentarios = comm.ncomentarios+1;*/
+        return comentario;
+        //if (data.id == parent_id) data.ncomentarios = data.ncomentarios + 1; return data;
+      })
+    })),
 );
 
 export function muroreducer (state:IMuroState = initialState, action: Action): IMuroState

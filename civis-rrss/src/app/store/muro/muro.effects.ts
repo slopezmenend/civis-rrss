@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { BackendService } from 'src/app/services/backend.service';
 import { IAppState } from '../AppState';
-import { GetMuroFail, GetMuroSuccess, MuroActionTypes } from './muro.actions';
+import { crearComentarioFail, crearComentarioSuccess, GetMuroFail, GetMuroSuccess, MuroActionTypes } from './muro.actions';
 
 @Injectable()
 export class MuroEffects {
@@ -23,6 +23,19 @@ export class MuroEffects {
       )
     )
   ));
+
+  crearComentario$ = createEffect(() => this.actions$.pipe(
+    ofType(MuroActionTypes.crearComentario),
+    mergeMap(({$user_id, $parent_id, $titulo, $texto}) => this.backendService.crearCommentario($user_id, $parent_id, $titulo, $texto)
+      .pipe(
+        map((res) => (
+          //crearComentarioSuccess ()
+          crearComentarioSuccess ()
+        ),
+        catchError((res) => of(crearComentarioFail({ payload: res})))
+      )
+    )
+  )));
 
   constructor(
     private actions$: Actions,

@@ -1,3 +1,4 @@
+import { User } from "@auth0/auth0-angular";
 import { ActionReducerMap } from "@ngrx/store";
 import { MuroEffects } from "./muro/muro.effects";
 import { IMuroState, muroreducer } from "./muro/muro.reducer";
@@ -9,7 +10,6 @@ import { TimelineEffects } from "./timeline/timeline.effects";
 import { ITimelineState, timelinereducer } from "./timeline/timeline.reducer";
 
 export interface IAppState {
-//  login: ILogingState;
   profile: IProfileState;
   muro: IMuroState;
   timeline: ITimelineState;

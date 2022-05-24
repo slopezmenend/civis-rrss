@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { initialUser, User } from 'src/app/models/User';
 import { IAppState } from '../AppState';
-import { GetProfileLoad, GetProfileSuccess, GetProfileFail, PostFollowSuccess, PostUnFollowSuccess, PostFollow, PostFollowFail, PostUnFollow, PostUnFollowFail}  from './profile.actions';
+import { GetProfileLoad, GetProfileSuccess, GetProfileFail, PostFollowSuccess, PostUnFollowSuccess, PostFollow, PostFollowFail, PostUnFollow, PostUnFollowFail, AuthFail, AuthSuccess, Auth}  from './profile.actions';
 
 export interface IProfileState {
     user_id: number;
@@ -9,6 +9,11 @@ export interface IProfileState {
     seguido: boolean;
     isLoading: boolean;
     message: string;
+}
+
+export interface IFollows {
+  data: User[];
+  message: string;
 }
 
 const initialState: IProfileState = {
@@ -41,7 +46,14 @@ const _profilereducer = createReducer (
         { ...state ,  message: 'Follow borrado correctamente!', seguido: seguido}),
         ),
         on (PostUnFollowFail, ( state, {payload} ) => (
-        { ...initialState , isLoading:false, message: payload, seguido: true}))
+        { ...initialState , isLoading:false, message: payload, seguido: true})),
+        on (Auth, (state, {email}) => ( { ...state , user_id:0})),
+        on (AuthSuccess, ( state, {user_id} ) => (
+          console.log ("Logueado como: " , user_id),
+          { ...state ,  message: 'Usuario logeado correctamente!', user_id: user_id}),
+          ),
+          on (AuthFail, ( state, {payload} ) => (
+          { ...initialState , isLoading:false, message: payload, seguido: true, user_id: 0 }))
 );
 
 export function profilereducer (state:IProfileState = initialState, action: Action): IProfileState

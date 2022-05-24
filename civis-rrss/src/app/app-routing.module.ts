@@ -7,6 +7,8 @@ import { ProfileViewComponent } from './components/profile-view/profile-view.com
 import { SearchListComponent } from './components/searchList/searchlist.component';
 import { TimelineViewComponent } from './components/timeline-view/timeline-view.component';
 import {AuthGuard} from '@auth0/auth0-angular';
+import { FollowerlistComponent } from './followerlist/followerlist.component';
+import { FollowinglistComponent } from './followinglist/followinglist.component';
 
 
 
@@ -19,6 +21,8 @@ const routes: Routes = [
   { path: 'mymuro', component: MymuroViewComponent, canActivate: [AuthGuard] },
   { path: 'timeline', component: TimelineViewComponent, canActivate: [AuthGuard] },
   { path: 'search', component: SearchListComponent, canActivate: [AuthGuard]},
+  { path: 'following/:id', component: FollowinglistComponent, canActivate: [AuthGuard]},
+  { path: 'followers/:id', component: FollowerlistComponent, canActivate: [AuthGuard]},
   { path: 'welcome', component: TimelineViewComponent},
   { path: '**', component: TimelineViewComponent},
 ]

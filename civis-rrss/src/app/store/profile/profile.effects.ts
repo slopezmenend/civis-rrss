@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { BackendService } from 'src/app/services/backend.service';
-import { GetProfileFail, GetProfileSuccess, PostFollowFail, PostFollowSuccess, PostUnFollowFail, PostUnFollowSuccess, ProfileActionTypes } from './profile.actions';
+import { AuthFail, AuthSuccess, GetProfileFail, GetProfileSuccess, PostFollowFail, PostFollowSuccess, PostUnFollowFail, PostUnFollowSuccess, ProfileActionTypes } from './profile.actions';
 
 @Injectable()
 export class ProfileEffects {
@@ -38,6 +38,17 @@ export class ProfileEffects {
       )
     )
   ));
+
+  login$ = createEffect(() => this.actions$.pipe(
+    ofType(ProfileActionTypes.AuthLoad),
+    mergeMap(({email}) => this.backendService.getUser (email)
+      .pipe(
+        map((data) => AuthSuccess ({ user_id: data.data.id })),
+        catchError((data) => of(AuthFail({ payload: data.message})))
+      )
+    )
+  ));
+
   constructor(
     private actions$: Actions,
     private backendService: BackendService

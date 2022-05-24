@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { Tweet } from 'src/app/models/Tweet';
 import { User } from 'src/app/models/User';
 import { IAppState } from '../AppState';
-import { SearchProfilesLoad, SearchProfilesSuccess, SearchProfilesFail}  from './profiles.actions';
+import { SearchProfilesLoad, SearchProfilesSuccess, SearchProfilesFail, GetFollowersFail, GetFollowersLoad, GetFollowersSuccess, GetFollowingFail, GetFollowingLoad, GetFollowingSuccess}  from './profiles.actions';
 
 export const initialProfiles:User[] = [];
 
@@ -25,10 +25,24 @@ const _profilesreducer = createReducer (
   on (SearchProfilesLoad, (state, {pattern}) => ( { ...state , pattern: pattern, isLoading:true})),
   on (SearchProfilesSuccess, ( state, {data} ) => (
       console.log (data),
-    { ...state , isLoading:false, message: 'Muro cargado correctamente!', data: data})
+    { ...state , isLoading:false, message: 'Perfiles buscados correctamente!', data: data})
     ),
   on (SearchProfilesFail, ( state, {payload} ) => (
-    { ...initialState , isLoading:false, message: payload}))
+    { ...initialState , isLoading:false, message: payload})),
+    on (GetFollowingLoad, (state) => ( { ...state , isLoading:true})),
+    on (GetFollowingSuccess, ( state, {data} ) => (
+        console.log ("Estamos en el FollowingSuccess con" , data),
+      { ...state , isLoading:false, message: 'Seguidos cargados correctamente!', data: data})
+      ),
+    on (GetFollowingFail, ( state, {payload} ) => (
+      { ...initialState , isLoading:false, message: payload})),
+      on (GetFollowersLoad, (state) => ( { ...state, isLoading:true})),
+      on (GetFollowersSuccess, ( state, {data} ) => (
+          console.log ("Estamos en el FollowersSuccess con" , data),
+        { ...state , isLoading:false, message: 'Seguidos cargados correctamente!', data: data})
+        ),
+      on (GetFollowersFail, ( state, {payload} ) => (
+        { ...initialState , isLoading:false, message: payload})),
 );
 
 export function profilesreducer (state:IProfilesState = initialState, action: Action): IProfilesState

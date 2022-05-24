@@ -16,7 +16,7 @@ export class UserlistComponent implements OnInit {
   public len:number = 0;
 
   constructor(private store:Store<IAppState>) {
-
+    console.log("Sitio raro buscando Abascal");
     console.log ("Cargado listado perfiles inicial" , this.profiles);
     this.store.select ('profiles').subscribe (profiles =>
       {
@@ -26,7 +26,7 @@ export class UserlistComponent implements OnInit {
         console.log ("Recuperados perfiles: ", this.profiles);
       });
 
-      this.store.dispatch(SearchProfilesLoad({pattern:'Abascal'}));
+//      this.store.dispatch(SearchProfilesLoad({pattern:'Abascal'}));
   }
 
   ngOnInit(): void {

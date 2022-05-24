@@ -4,6 +4,8 @@ import { IAppState } from 'src/app/store/AppState';
 import { Tweet } from '../../models/Tweet';
 import { ActivatedRoute } from '@angular/router';
 import { GetMuroLoad } from 'src/app/store/muro/muro.actions';
+import { AuthService } from '@auth0/auth0-angular';
+import { Auth } from 'src/app/store/profile/profile.actions';
 
 @Component({
   selector: 'app-murolist',
@@ -14,11 +16,12 @@ export class MurolistComponent implements OnInit {
 
   public tweets:Tweet[] = [];
   public len:number = 0;
-  @Input() id:number = 0;
+  public id:number = 0;
   public page:number=0;
   public cargando:boolean=false;
 
-  constructor(private store:Store<IAppState>, private route:ActivatedRoute) {
+  constructor(public auth: AuthService, private store:Store<IAppState>) {
+
     console.log ("Cargado muro inicial para el id " ,this.id, this.tweets);
     this.store.select ('muro').subscribe (muro =>
       {
@@ -34,9 +37,13 @@ export class MurolistComponent implements OnInit {
     //    let user_id = +params['id']; // (+) converts string 'id' to a number
     this.store.select ('profile').subscribe (profile =>
       {
+        if (profile.data.id != 0)
+        {
         this.id = profile.data.id;
-        console.log ("El campo id tiene valor" , this.id);
+        this.page = 0;
+        console.log ("En el muro, el campo id tiene valor" , this.id);
         this.getMuro();
+        }
       });
 
      //});
@@ -45,6 +52,11 @@ export class MurolistComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+   ngOnChanges() {
+      console.log ("llamando al get muro desde ngChanges")  ;
+      this.getMuro();
+    }
 
   getMuro ()
   {

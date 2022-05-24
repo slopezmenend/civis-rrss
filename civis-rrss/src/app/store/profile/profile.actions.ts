@@ -12,7 +12,10 @@ export enum ProfileActionTypes {
     PostUnFollow = '[Profile] UnFollow',
     PostUnFollowSuccess = '[Profile] UnFollow Success',
     PostUnFollowFail = '[Profile] UnFollow Fail',
-}
+    AuthLoad = '[Profile] AuthLoad',
+    AuthSuccess = '[Profile] AuthSuccess',
+    AuthFail = '[Profile] AuthFail',
+  }
 
 export const GetProfileLoad = createAction(
   ProfileActionTypes.GetProfileLoad,
@@ -56,5 +59,19 @@ export const PostUnFollowSuccess = createAction(
 
 export const PostUnFollowFail = createAction(
   ProfileActionTypes.PostUnFollowFail,
+  props <{payload: any}>()
+);
+export const Auth = createAction(
+  ProfileActionTypes.AuthLoad,
+  props < {email:string}>()
+);
+
+export const AuthSuccess = createAction(
+  ProfileActionTypes.AuthSuccess,
+  props < {user_id: number}>()
+);
+
+export const AuthFail = createAction(
+  ProfileActionTypes.AuthFail,
   props <{payload: any}>()
 );

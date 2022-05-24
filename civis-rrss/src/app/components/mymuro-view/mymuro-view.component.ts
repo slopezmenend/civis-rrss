@@ -13,20 +13,29 @@ import { initialUser, User } from '../../models/User';
 })
 export class MymuroViewComponent implements OnInit {
   public usuario:User;
-  public id:number = 365;
+  public id:number = 0;
 
   constructor(private store:Store<IAppState>, private route: ActivatedRoute) {
     console.log ("Entrando en mi muro");
     this.usuario = initialUser;
     this.store.select ('profile').subscribe (profile =>
       {
-        this.usuario = profile.data;
+        let previous_id = this.id;
+        if (this.id != profile.user_id)
+        {
+          this.id = profile.user_id;
+          this.usuario = profile.data;
+        }
+
         console.log (this.usuario);
+        console.log ("En mymuro el id tiene valor:", this.id);
+
+        if (this.id != 0 && previous_id != this.id)
+          this.store.dispatch(GetProfileLoad({user_id: this.id}));
       });
       //this.route.params.subscribe(params => {
         //this.id = +params['id']; // (+) converts string 'id' to a number
-        console.log ("En mymuro el id tiene valor:", this.id);
-    this.store.dispatch(GetProfileLoad({user_id: this.id}));
+
      //});
   }
 

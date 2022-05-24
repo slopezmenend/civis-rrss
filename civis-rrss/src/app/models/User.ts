@@ -20,10 +20,11 @@ export interface User {
   biografia: string;
   ideologia: number;
   ideologiaadicional: number;
-  created_at: string,
+  follows:any;
+  /*created_at: string,
   updated_at: string,
   seguido_id: number|null,
-  seguidor_id: number|null
+  seguidor_id: number|null*/
 }
 
 export const initialUser:User =
@@ -47,10 +48,11 @@ export const initialUser:User =
   biografia: '',
   ideologia: 0,
   ideologiaadicional: 0,
-  created_at: '',
+  follows:null
+  /*created_at: '',
   updated_at: '',
   seguido_id: 0,
-  seguidor_id: 0
+  seguidor_id: 0*/
 };
 
 export interface IUser {
