@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { Tweet } from 'src/app/models/Tweet';
 import { User } from 'src/app/models/User';
 import { IAppState } from '../AppState';
-import { GetMuroLoad, GetMuroSuccess, GetMuroFail, crearComentario, crearComentarioFail, crearComentarioSuccess, añadirComentario, sumarComentario, reaccionar, reaccionarFail, reaccionarSuccess, borrarReaccion, borrarReaccionFail, borrarReaccionSuccess}  from './muro.actions';
+import { GetMuroLoad, GetMuroSuccess, GetMuroFail, crearComentario, crearComentarioFail, crearComentarioSuccess, añadirComentario, sumarComentario, reaccionar, reaccionarFail, reaccionarSuccess, borrarReaccion, borrarReaccionFail, borrarReaccionSuccess, encantaComentario, odioComentario, disgustaComentario, gustaComentario, igualComentario}  from './muro.actions';
 
 export const initialMuro:Tweet[] = [];
 
@@ -65,6 +65,55 @@ const _muroreducer = createReducer (
         //if (data.id == parent_id) data.ncomentarios = data.ncomentarios + 1; return data;
       })
     })),
+
+    on (encantaComentario, ( state, {id, diff} ) => (
+      console.log ("[Muro Reducer] encantaComentario", id),
+    { ...state , message: 'Comentario sumado correctamente!', data: state.data.map (
+      function (comentario) {
+        if (comentario.id == id) comentario.encanta = comentario.encanta + diff;
+        return comentario;
+      }
+    )})),
+
+    on (gustaComentario, ( state, {id, diff} ) => (
+      console.log ("[Muro Reducer] gustaComentario", id),
+    { ...state , message: 'Comentario sumado correctamente!', data: state.data.map (
+      function (comentario) {
+        if (comentario.id == id) comentario.gusta = comentario.gusta + diff;
+        return comentario;
+      }
+    )})),
+
+    on (igualComentario, ( state, {id, diff} ) => (
+      console.log ("[Muro Reducer] igualComentario", id),
+    { ...state , message: 'Comentario sumado correctamente!', data: state.data.map (
+      function (comentario) {
+        if (comentario.id == id){
+          comentario.igual = comentario.igual + diff;
+          console.log ("Comentario igual: ", comentario.igual);
+        }
+        return comentario;
+      }
+    )})),
+
+    on (disgustaComentario, ( state, {id, diff} ) => (
+      console.log ("[Muro Reducer] disgustaComentario", id),
+    { ...state , message: 'Comentario sumado correctamente!', data: state.data.map (
+      function (comentario) {
+        if (comentario.id == id) comentario.disgusta = comentario.disgusta + diff;
+        return comentario;
+      }
+    )})),
+
+    on (odioComentario, ( state, {id, diff} ) => (
+      console.log ("[Muro Reducer] odioComentario", id),
+    { ...state , message: 'Comentario sumado correctamente!', data: state.data.map (
+      function (comentario) {
+        if (comentario.id == id) comentario.odia = comentario.odia + diff;
+        return comentario;
+      }
+    )})),
+
 );
 
 export function muroreducer (state:IMuroState = initialState, action: Action): IMuroState

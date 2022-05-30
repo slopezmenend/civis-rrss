@@ -16,7 +16,12 @@ export enum MuroActionTypes {
     crearComentarioSuccess = '[Muro] crearComentario Success',
     crearComentarioFail = '[Muro] crearComentario Fail',
     añadirComentario = '[Muro] Añadir Comentario',
-    sumarComentario = '[Muro] Sumar Comentario'
+    sumarComentario = '[Muro] Sumar Comentario',
+    encantaComentario = '[Muro] Encanta Comentario',
+    gustaComentario = '[Muro] gusta Comentario',
+    igualComentario = '[Muro] igual Comentario',
+    disgustaComentario = '[Muro] disgusta Comentario',
+    odioComentario = '[Muro] Odio Comentario',
  }
 
 export const GetMuroLoad = createAction(
@@ -85,3 +90,29 @@ export const sumarComentario = createAction(
   MuroActionTypes.añadirComentario,
   props < {parent_id:number}>()
 );
+
+export const encantaComentario = createAction(
+  MuroActionTypes.encantaComentario,
+  props < {id:number, diff: number}>()
+);
+
+export const gustaComentario = createAction(
+  MuroActionTypes.gustaComentario,
+  props < {id:number, diff: number}>()
+);
+
+export const igualComentario = createAction(
+  MuroActionTypes.igualComentario,
+  props < {id:number, diff: number}>()
+);
+
+export const disgustaComentario = createAction(
+  MuroActionTypes.disgustaComentario,
+  props < {id:number, diff: number}>()
+);
+
+export const odioComentario = createAction(
+  MuroActionTypes.odioComentario,
+  props < {id:number, diff: number}>()
+);
+

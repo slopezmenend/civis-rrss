@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { initialUser, User } from 'src/app/models/User';
 import { IAppState } from 'src/app/store/AppState';
-import { borrarReaccion, reaccionar } from 'src/app/store/muro/muro.actions';
+import { borrarReaccion, disgustaComentario, encantaComentario, gustaComentario, igualComentario, odioComentario, reaccionar } from 'src/app/store/muro/muro.actions';
 import { initialTweet, Tweet } from '../../models/Tweet';
 
 @Component({
@@ -49,15 +49,35 @@ export class TweetComponent implements OnInit {
 
   reaccionar (valor:number)
   {
+    console.log ("[Tweet][Reaccionar] valor: ", valor);
     if (this.user_id != 0)
       if (this.reaccionado == 0)
       {
           this.reaccionado = valor;
+          switch (this.reaccionado)
+          {
+            case 1: { this.store.dispatch(encantaComentario({id: this.tweet.id, diff:1 })); break;} //this.tweet.encanta = this.tweet.encanta + 1;
+            case 2: { this.store.dispatch(gustaComentario({id: this.tweet.id, diff:1 }));  break;}
+            case 3: { this.store.dispatch(igualComentario({id: this.tweet.id, diff:1 })); break;}
+            case 4: { this.store.dispatch(disgustaComentario({id: this.tweet.id, diff:1 })); break;}
+            case 5: { this.store.dispatch(odioComentario({id: this.tweet.id, diff:1 })); break;}
+          }
+          console.log ("[Tweet][Reaccionar] Reaccionado: ", this.reaccionado);
+          console.log ("[Tweet][Reaccionar] Tweet: ", this.tweet);
+
           //dispatch del effecto para reaccionar al tweet
           this.store.dispatch(reaccionar({id:this.tweet.id, user_id:this.user_id, reaccion: this.reaccionado}));
       }
       else
       {
+        switch (this.reaccionado)
+        {
+          case 1: { this.store.dispatch(encantaComentario({id: this.tweet.id, diff:-1 })); break;} //this.tweet.encanta = this.tweet.encanta + 1;
+          case 2: { this.store.dispatch(gustaComentario({id: this.tweet.id, diff:-1 }));  break;}
+          case 3: { this.store.dispatch(igualComentario({id: this.tweet.id, diff:-1 })); break;}
+          case 4: { this.store.dispatch(disgustaComentario({id: this.tweet.id, diff:-1 })); break;}
+          case 5: { this.store.dispatch(odioComentario({id: this.tweet.id, diff:-1 })); break;}
+        }
         this.reaccionado = 0;
         //dispatch del effecto para eliminar la reaccion
         this.store.dispatch(borrarReaccion({id:this.tweet.id, user_id:this.user_id}));

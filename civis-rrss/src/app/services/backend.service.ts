@@ -14,7 +14,7 @@ import { añadirComentario, sumarComentario } from '../store/muro/muro.actions';
   providedIn: 'root'
 })
 export class BackendService {
-  private baseUrL:string = 'http://127.0.0.1:8000/';
+  private baseUrL:string = 'https://civis-rrss-backend.herokuapp.com/';//'http://127.0.0.1:8000/';
 
   constructor(private http: HttpClient, private store:Store<IAppState>) { }
 
