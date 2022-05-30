@@ -1,4 +1,5 @@
 import { Time } from "@angular/common";
+import { IFollow } from "../store/profile/profile.reducer";
 
 export interface User {
   id: number;
@@ -20,7 +21,7 @@ export interface User {
   biografia: string;
   ideologia: number;
   ideologiaadicional: number;
-  follows:any;
+  follows: IFollow|any;
   /*created_at: string,
   updated_at: string,
   seguido_id: number|null,

@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { BackendService } from 'src/app/services/backend.service';
 import { IAppState } from '../AppState';
-import { crearComentarioFail, crearComentarioSuccess, GetMuroFail, GetMuroSuccess, MuroActionTypes } from './muro.actions';
+import { borrarReaccionFail, borrarReaccionSuccess, crearComentarioFail, crearComentarioSuccess, GetMuroFail, GetMuroSuccess, MuroActionTypes, reaccionarFail, reaccionarSuccess } from './muro.actions';
 
 @Injectable()
 export class MuroEffects {
@@ -20,6 +20,30 @@ export class MuroEffects {
           GetMuroSuccess ({ data: data.data.data}))
         ),
         catchError((data) => of(GetMuroFail({ payload: data.message})))
+      )
+    )
+  ));
+
+  reaccionar$ = createEffect(() => this.actions$.pipe(
+    ofType(MuroActionTypes.reaccionar),
+    mergeMap(({id, user_id, reaccion}) => this.backendService.reaccionar(id, user_id, reaccion)
+      .pipe(
+        map((data) => (
+          reaccionarSuccess ())
+        ),
+        catchError((data) => of(reaccionarFail({ payload: data.message})))
+      )
+    )
+  ));
+
+  borrarReaccion$ = createEffect(() => this.actions$.pipe(
+    ofType(MuroActionTypes.borrarReaccion),
+    mergeMap(({id, user_id, reaccion}) => this.backendService.borrarReaccion(id, user_id)
+      .pipe(
+        map((data) => (
+          borrarReaccionSuccess ())
+        ),
+        catchError((data) => of(borrarReaccionFail({ payload: data.message})))
       )
     )
   ));

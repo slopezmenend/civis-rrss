@@ -1,5 +1,5 @@
 import { Time } from "@angular/common";
-import { initialUser, User } from "./User";
+import { initialUser, IUser, User } from "./User";
 
 export interface Tweet {
   id: number;
@@ -25,6 +25,7 @@ updated_at: string;
 seguido_id: number;
 seguidor_id:number;
 //Cruce con usuario
+diputado: User;
 name: string;
 email: string;
 email_verified_at: string;
@@ -71,6 +72,7 @@ export const initialTweet:Tweet = {
   updated_at: '',
   seguido_id: 0,
   seguidor_id: 0,
+  diputado: initialUser,
   name: '',
   email: '',
   email_verified_at: '',

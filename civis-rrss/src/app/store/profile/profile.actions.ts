@@ -15,6 +15,12 @@ export enum ProfileActionTypes {
     AuthLoad = '[Profile] AuthLoad',
     AuthSuccess = '[Profile] AuthSuccess',
     AuthFail = '[Profile] AuthFail',
+    CompleteUser = '[Profile] CompleteUser',
+    CompleteUserSuccess = '[Profile] CompleteUser Success',
+    CompleteUserFail = '[Profile] CompleteUser Fail',
+    UpdateProfile = '[Profile] Update',
+    UpdateProfileSuccess = '[Profile] Update Success',
+    UpdateProfileFail = '[Profile] Update Fail',
   }
 
 export const GetProfileLoad = createAction(
@@ -61,6 +67,7 @@ export const PostUnFollowFail = createAction(
   ProfileActionTypes.PostUnFollowFail,
   props <{payload: any}>()
 );
+
 export const Auth = createAction(
   ProfileActionTypes.AuthLoad,
   props < {email:string}>()
@@ -73,5 +80,38 @@ export const AuthSuccess = createAction(
 
 export const AuthFail = createAction(
   ProfileActionTypes.AuthFail,
+  props <{payload: any}>()
+);
+
+export const CompleteUser = createAction(
+  ProfileActionTypes.CompleteUser,
+  props < {email:string, name:string, foto:string}>()
+);
+
+export const CompleteUserSuccess = createAction(
+  ProfileActionTypes.CompleteUserSuccess,
+  props < {user_id: number}>()
+);
+
+export const CompleteUserFail = createAction(
+  ProfileActionTypes.CompleteUserFail,
+  props <{payload: any}>()
+);
+
+export const UpdateProfile = createAction(
+  ProfileActionTypes.UpdateProfile,
+  props < {user_id:number, email:string, nombre:string, circunscripcion:string,
+    partido:string, grupo:string, biografia:string, ideologia:number,
+    ideologiaadicional:number, web:string, facebook:string,
+    twitter:string, instagram:string, youtube:string}>()
+);
+
+
+export const UpdateProfileSuccess = createAction(
+  ProfileActionTypes.UpdateProfileSuccess
+);
+
+export const UpdateProfileFail = createAction(
+  ProfileActionTypes.UpdateProfileFail,
   props <{payload: any}>()
 );

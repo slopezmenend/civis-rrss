@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { initialUser, User } from 'src/app/models/User';
 import { IAppState } from '../AppState';
-import { GetProfileLoad, GetProfileSuccess, GetProfileFail, PostFollowSuccess, PostUnFollowSuccess, PostFollow, PostFollowFail, PostUnFollow, PostUnFollowFail, AuthFail, AuthSuccess, Auth}  from './profile.actions';
+import { GetProfileLoad, GetProfileSuccess, GetProfileFail, PostFollowSuccess, PostUnFollowSuccess, PostFollow, PostFollowFail, PostUnFollow, PostUnFollowFail, AuthFail, AuthSuccess, Auth, UpdateProfile, UpdateProfileFail, UpdateProfileSuccess, CompleteUser, CompleteUserFail, CompleteUserSuccess}  from './profile.actions';
 
 export interface IProfileState {
     user_id: number;
@@ -9,6 +9,14 @@ export interface IProfileState {
     seguido: boolean;
     isLoading: boolean;
     message: string;
+}
+
+export interface IFollow {
+  id: number,
+  seguido_id: number,
+  seguidor_id: number,
+  created_at: string,
+  updated_at: string
 }
 
 export interface IFollows {
@@ -53,7 +61,28 @@ const _profilereducer = createReducer (
           { ...state ,  message: 'Usuario logeado correctamente!', user_id: user_id}),
           ),
           on (AuthFail, ( state, {payload} ) => (
-          { ...initialState , isLoading:false, message: payload, seguido: true, user_id: 0 }))
+          { ...initialState , isLoading:false, message: payload, seguido: true, user_id: 0 })),
+          on (CompleteUser, (state, {email, name, foto}) => ( { ...state})),
+          on (CompleteUserSuccess, ( state, {user_id} ) => (
+            console.log ("Logueado como: " , user_id),
+            { ...state ,  message: 'Usuario completado correctamente!', user_id: user_id}),
+            ),
+            on (CompleteUserFail, ( state, {payload} ) => (
+            { ...initialState , isLoading:false, message: payload, seguido: true })),
+          on (UpdateProfile, (state, {user_id, email, nombre, circunscripcion,
+            partido, grupo, biografia, ideologia,
+            ideologiaadicional, web, facebook,
+            twitter, instagram, youtube}) => ( { ...state ,
+              data: {...state.data, nombre: nombre, circunscripcion: circunscripcion,
+                partido:partido, grupo:grupo, biografia:biografia,
+                ideologia: ideologia, ideologiaadicional: ideologiaadicional,
+                web: web, facebook: facebook, twitter: twitter, instagram: instagram, youtube:youtube}})),
+          on (UpdateProfileSuccess, ( state ) => (
+            console.log ("Perfil actualizado: " , state.user_id),
+            { ...state ,  message: 'Usuario actualizado correctamente!'}),
+            ),
+            on (UpdateProfileFail, ( state, {payload} ) => (
+            { ...initialState , isLoading:false, message: payload, seguido: true, user_id: 0 }))
 );
 
 export function profilereducer (state:IProfileState = initialState, action: Action): IProfileState

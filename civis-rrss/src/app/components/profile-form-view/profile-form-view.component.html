@@ -1,131 +1,144 @@
-<div class="container">
-  <div class="form-group row mt-2 p-2">
-    <label class="col-2" for="nombrec">Nombre</label>
-    <input type="text" class="col form-control" id="nombrec" aria-describedby="nombrecHelp"
-      placeholder="Introduzca nombre completo" value="{{usuario.nombre}}" [readonly]="!edit">
-  </div>
-  <div *ngIf="usuario.idcivis != 0" class="form-group row mt-2 p-2">
-    <label class="col-2" for="circunscripcion">Circunscripción</label>
-    <input type="text" class="col form-control" id="circunscripcion" aria-describedby="cirHelp"
-      placeholder="Introduzca circunscripción" value="{{usuario.circunscripcion}}" [readonly]="!edit">
-  </div>
-  <div *ngIf="usuario.idcivis != 0" class="form-group row mt-2 p-2">
-    <label class="col-2" for="partido">Partido</label>
-    <input type="text" class="col form-control" id="partido" aria-describedby="partidoHelp"
-      placeholder="Introduzca partido" value="{{usuario.partido}}" [readonly]="!edit">
-  </div>
-  <div *ngIf="usuario.idcivis != 0" class="form-group row mt-2 p-2">
-    <label class="col-2" for="grupo">Grupo</label>
-    <input type="text" class="col form-control" id="grupo" aria-describedby="grupoHelp" placeholder="Introduzca grupo"
-      value="{{usuario.grupo}}" [readonly]="!edit">
-  </div>
-  <div class="form-group row mt-2 p-2">
-    <label class="col-2" for="biografia">Biografia</label>
-    <textarea class="col form-control" id="biografia" rows="5" [readonly]="!edit">{{usuario.biografia}}</textarea>
-  </div>
+<div *ngIf="!cargando">
+  <form>
+    <div class="container">
+      <div class="form-group row mt-2 p-2">
+        <label class="col-2" for="nombrec">Nombre</label>
+        <input type="text" class="col form-control" id="nombrec" aria-describedby="nombrecHelp"
+          placeholder="Introduzca nombre completo" [formControl]="nombre">
+      </div>
+      <div *ngIf="usuario.idcivis != 0" class="form-group row mt-2 p-2">
+        <label class="col-2" for="circunscripcion">Circunscripción</label>
+        <input type="text" class="col form-control" id="circunscripcion" aria-describedby="cirHelp"
+          placeholder="Introduzca circunscripción" [formControl]="circunscripcion">
+      </div>
+      <div *ngIf="usuario.idcivis != 0" class="form-group row mt-2 p-2">
+        <label class="col-2" for="partido">Partido</label>
+        <input type="text" class="col form-control" id="partido" aria-describedby="partidoHelp"
+          placeholder="Introduzca partido" [formControl]="partido">
+      </div>
+      <div *ngIf="usuario.idcivis != 0" class="form-group row mt-2 p-2">
+        <label class="col-2" for="grupo">Grupo</label>
+        <input type="text" class="col form-control" id="grupo" aria-describedby="grupoHelp"
+          placeholder="Introduzca grupo" [formControl]="grupo">
+      </div>
+      <div class="form-group row mt-2 p-2">
+        <label class="col-2" for="biografia">Biografia</label>
+        <textarea class="col form-control" id="biografia" rows="5" [formControl]="biografia"></textarea>
+      </div>
 
-  <div>
-    <div>Ideología - 0 (ultraizquierda) a 10 (ultraderecha)</div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio0" value="option0"
-        [checked]="usuario.ideologia == 0" [disabled]="!edit">
-      <label class="form-check-label" for="inlineRadio0">0</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
-        [checked]="usuario.ideologia == 1" [disabled]="!edit">
-      <label class="form-check-label" for="inlineRadio1">1</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
-        [checked]="usuario.ideologia == 2" [disabled]="!edit">
-      <label class="form-check-label" for="inlineRadio2">2</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"
-        [checked]="usuario.ideologia == 3" [disabled]="!edit">
-      <label class="form-check-label" for="inlineRadio3">3</label>
+      <div>
+        <div>Ideología - 0 (ultraizquierda) a 10 (ultraderecha)</div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio0" value="0"
+            [checked]="usuario.ideologia == 0" [formControl]="ideologia">
+          <label class="form-check-label" for="inlineRadio0">0</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"
+            [checked]="usuario.ideologia == 1" [formControl]="ideologia">
+          <label class="form-check-label" for="inlineRadio1">1</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2"
+            [checked]="usuario.ideologia == 2" [formControl]="ideologia">
+          <label class="form-check-label" for="inlineRadio2">2</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3"
+            [checked]="usuario.ideologia == 3" [formControl]="ideologia">
+          <label class="form-check-label" for="inlineRadio3">3</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="4"
+            [checked]="usuario.ideologia == 4" [formControl]="ideologia">
+          <label class="form-check-label" for="inlineRadio4">4</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5"
+            [checked]="usuario.ideologia == 5" [formControl]="ideologia">
+          <label class="form-check-label" for="inlineRadio5">5</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio6" value="6"
+            [checked]="usuario.ideologia == 6" [formControl]="ideologia">
+          <label class="form-check-label" for="inlineRadio6">6</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio7" value="7"
+            [checked]="usuario.ideologia == 7" [formControl]="ideologia">
+          <label class="form-check-label" for="inlineRadio7">7</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio8" value="8"
+            [checked]="usuario.ideologia == 8" [formControl]="ideologia">
+          <label class="form-check-label" for="inlineRadio8">8</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio9" value="9"
+            [checked]="usuario.ideologia == 9" [formControl]="ideologia">
+          <label class="form-check-label" for="inlineRadio9">9</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio10" value="10"
+            [checked]="usuario.ideologia == 10" [formControl]="ideologia">
+          <label class="form-check-label" for="inlineRadio10">10</label>
+        </div>
+
+      </div>
+
+      <div class="form-group row mt-2 p-2">
+        <label class="col-2" for="ad-id">Ideología adicional</label>
+        <select id="ad-id" name="ad-id" class="col form-select form-control" aria-label="valores adicionales ideología"
+          [formControl]="ideologiaadicional">
+          <option value="0" [selected]="usuario.ideologiaadicional == 0">Ninguna</option>
+          <option value="1" [selected]="usuario.ideologiaadicional == 1">Nacionalista</option>
+          <option value="2" [selected]="usuario.ideologiaadicional == 2">Regionalista</option>
+          <option value="3" [selected]="usuario.ideologiaadicional == 3">Centralista</option>
+        </select>
+      </div>
+
+      <div *ngIf="usuario.web != '' || edit" class="form-group row mt-2 p-2">
+        <label class="col-2" for="partido">Web personal</label>
+        <input type="text" class="col form-control" id="partido" aria-describedby="partidoHelp"
+          placeholder="Introduzca web personal" [formControl]="web">
+      </div>
+      <div *ngIf="usuario.facebook != '' || edit" class="form-group row mt-2 p-2">
+        <label class="col-2" for="partido">Facebook</label>
+        <input type="text" class="col form-control" id="facebook" aria-describedby="partidoHelp"
+          placeholder="Introduzca facebook" [formControl]="facebook">
+      </div>
+      <div *ngIf="usuario.twitter != '' || edit" class="form-group row mt-2 p-2">
+        <label class="col-2" for="partido">Twitter</label>
+        <input type="text" class="col form-control" id="twitter" aria-describedby="partidoHelp"
+          placeholder="Introduzca twitter" [formControl]="twitter">
+      </div>
+      <div *ngIf="usuario.instagram != '' || edit" class="form-group row mt-2 p-2">
+        <label class="col-2" for="partido">Instagram</label>
+        <input type="text" class="col form-control" id="instagram" aria-describedby="partidoHelp"
+          placeholder="Introduzca instagram" [formControl]="instagram">
+      </div>
+      <div *ngIf="usuario.youtube != '' || edit" class="form-group row mt-2 p-2">
+        <label class="col-2" for="partido">Youtube</label>
+        <input type="text" class="col form-control" id="youtube" aria-describedby="partidoHelp"
+          placeholder="Introduzca youtube" [formControl]="youtube">
+      </div>
+      <div *ngIf="usuario.email != '' || edit" class="form-group row mt-2 p-2">
+        <label class="col-2" for="partido">Email</label>
+        <input type="text" class="col form-control" id="email" aria-describedby="partidoHelp"
+          placeholder="Introduzca email" [formControl]="email" readonly>
+      </div>
     </div>
 
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4"
-        [checked]="usuario.ideologia == 4" [disabled]="!edit">
-      <label class="form-check-label" for="inlineRadio4">4</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5"
-        [checked]="usuario.ideologia == 5" [disabled]="!edit">
-      <label class="form-check-label" for="inlineRadio5">5</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio6" value="option6"
-        [checked]="usuario.ideologia == 6" [disabled]="!edit">
-      <label class="form-check-label" for="inlineRadio6">6</label>
-    </div>
+    <button *ngIf="edit" (click)="UpdatePerfil()" class="btn btn-info w-60" type="button">Actualizar</button>
 
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio7" value="option7"
-        [checked]="usuario.ideologia == 7" [disabled]="!edit">
-      <label class="form-check-label" for="inlineRadio7">7</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio8" value="option8"
-        [checked]="usuario.ideologia == 8" [disabled]="!edit">
-      <label class="form-check-label" for="inlineRadio8">8</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio9" value="option9"
-        [checked]="usuario.ideologia == 9" [disabled]="!edit">
-      <label class="form-check-label" for="inlineRadio9">9</label>
-    </div>
+  </form>
+</div>
 
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio10" value="option10"
-        [checked]="usuario.ideologia == 10" [disabled]="!edit">
-      <label class="form-check-label" for="inlineRadio10">10</label>
-    </div>
-
-  </div>
-
-  <div class="form-group row mt-2 p-2">
-    <label class="col-2" for="ad-id">Ideología adicional</label>
-    <select id="ad-id" name="ad-id" class="col form-select form-control" aria-label="valores adicionales ideología"
-      [disabled]="!edit">
-      <option value="0" [selected]="usuario.ideologiaadicional == 0">Ninguna</option>
-      <option value="1" [selected]="usuario.ideologiaadicional == 1">Nacionalista</option>
-      <option value="2" [selected]="usuario.ideologiaadicional == 2">Regionalista</option>
-      <option value="3" [selected]="usuario.ideologiaadicional == 3">Centralista</option>
-    </select>
-  </div>
-
-  <div *ngIf="usuario.web != ''" class="form-group row mt-2 p-2">
-    <label class="col-2" for="partido">Web personal</label>
-    <input type="text" class="col form-control" id="partido" aria-describedby="partidoHelp"
-      placeholder="Introduzca web personal" value="{{usuario.web}}" [readonly]="!edit">
-  </div>
-  <div *ngIf="usuario.facebook != ''" class="form-group row mt-2 p-2">
-    <label class="col-2" for="partido">Facebook</label>
-    <input type="text" class="col form-control" id="partido" aria-describedby="partidoHelp"
-      placeholder="Introduzca facebook" value="{{usuario.facebook}}" [readonly]="!edit">
-  </div>
-  <div *ngIf="usuario.twitter != ''" class="form-group row mt-2 p-2">
-    <label class="col-2" for="partido">Twitter</label>
-    <input type="text" class="col form-control" id="partido" aria-describedby="partidoHelp"
-      placeholder="Introduzca twitter" value="{{usuario.twitter}}" [readonly]="!edit">
-  </div>
-  <div *ngIf="usuario.instagram != ''" class="form-group row mt-2 p-2">
-    <label class="col-2" for="partido">Instagram</label>
-    <input type="text" class="col form-control" id="partido" aria-describedby="partidoHelp"
-      placeholder="Introduzca instagram" value="{{usuario.instagram}}" [readonly]="!edit">
-  </div>
-  <div *ngIf="usuario.youtube != ''" class="form-group row mt-2 p-2">
-    <label class="col-2" for="partido">Youtube</label>
-    <input type="text" class="col form-control" id="partido" aria-describedby="partidoHelp"
-      placeholder="Introduzca youtube" value="{{usuario.youtube}}" [readonly]="!edit">
-  </div>
-  <div *ngIf="usuario.email != ''" class="form-group row mt-2 p-2">
-    <label class="col-2" for="partido">Email</label>
-    <input type="text" class="col form-control" id="partido" aria-describedby="partidoHelp"
-      placeholder="Introduzca email" value="{{usuario.email}}" [readonly]="!edit">
+<div *ngIf="cargando" class="container d-flex justify-content-center">
+  <div class="spinner-border text-info" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only">Cargando...</span>
   </div>
 </div>

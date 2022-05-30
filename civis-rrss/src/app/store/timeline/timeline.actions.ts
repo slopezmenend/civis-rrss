@@ -6,9 +6,6 @@ export enum TimelineActionTypes {
     GetTimelineLoad = '[Timeline] Get Timeline',
     GetTimelineSuccess = '[Timeline] Get Timeline Success',
     GetTimelineFail = '[Timeline] Get Timeline Fail',
-    PostTimeline = '[Timeline] Post Timeline',
-    PostTimelineSuccess = '[Timeline] Post Timeline Success',
-    PostTimelineFail = '[Timeline] Post Timeline Fail',
 }
 
 

@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { Tweet } from 'src/app/models/Tweet';
 import { User } from 'src/app/models/User';
 import { IAppState } from '../AppState';
-import { GetMuroLoad, GetMuroSuccess, GetMuroFail, crearComentario, crearComentarioFail, crearComentarioSuccess, añadirComentario, sumarComentario}  from './muro.actions';
+import { GetMuroLoad, GetMuroSuccess, GetMuroFail, crearComentario, crearComentarioFail, crearComentarioSuccess, añadirComentario, sumarComentario, reaccionar, reaccionarFail, reaccionarSuccess, borrarReaccion, borrarReaccionFail, borrarReaccionSuccess}  from './muro.actions';
 
 export const initialMuro:Tweet[] = [];
 
@@ -31,7 +31,19 @@ const _muroreducer = createReducer (
     ),
   on (GetMuroFail, ( state, {payload} ) => (
     { ...initialState , isLoading:false, message: payload})),
-    on (crearComentario, (state, {$user_id, $parent_id, $titulo, $texto}) => ( { ...state , isLoading:true})),
+  on (reaccionar, (state, {id, user_id, reaccion}) => ( { ...state })),
+  on (reaccionarSuccess, ( state ) => (
+    { ...state, message: 'reaccionado correctamente!'})
+    ),
+  on (reaccionarFail, ( state, {payload} ) => (
+    { ...state , isLoading:false, message: payload})),
+    on (borrarReaccion, (state, {id, user_id}) => ( { ...state })),
+    on (borrarReaccionSuccess, ( state ) => (
+      { ...state, message: 'reaccionado correctamente!'})
+      ),
+    on (borrarReaccionFail, ( state, {payload} ) => (
+      { ...state , isLoading:false, message: payload})),
+        on (crearComentario, (state, {$user_id, $parent_id, $titulo, $texto}) => ( { ...state , isLoading:true})),
     on (crearComentarioSuccess, ( state ) => (
       { ...state , isLoading:false, message: 'Comentario creado correctamente!'})
       ),

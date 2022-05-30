@@ -6,6 +6,12 @@ export enum MuroActionTypes {
     GetMuroLoad = '[Muro] Get Muro',
     GetMuroSuccess = '[Muro] Get Muro Success',
     GetMuroFail = '[Muro] Get Muro Fail',
+    reaccionar = '[Muro] crearReaccion',
+    reaccionarSuccess = '[Muro] crearReaccion Success',
+    reaccionarFail = '[Muro] crearReaccion Fail',
+    borrarReaccion = '[Muro] borrarReaccion',
+    borrarReaccionSuccess = '[Muro] borrarReaccion Success',
+    borrarReaccionFail = '[Muro] borrarReaccion Fail',
     crearComentario = '[Muro] crearComentario',
     crearComentarioSuccess = '[Muro] crearComentario Success',
     crearComentarioFail = '[Muro] crearComentario Fail',
@@ -25,6 +31,34 @@ export const GetMuroSuccess = createAction(
 
 export const GetMuroFail = createAction(
   MuroActionTypes.GetMuroFail,
+  props <{payload: any}>()
+);
+
+export const reaccionar = createAction(
+  MuroActionTypes.reaccionar,
+  props <{id:number, user_id:number, reaccion: number}>()
+);
+
+export const reaccionarSuccess = createAction(
+  MuroActionTypes.reaccionarSuccess
+);
+
+export const reaccionarFail = createAction(
+  MuroActionTypes.reaccionarFail,
+  props <{payload: any}>()
+);
+
+export const borrarReaccion = createAction(
+  MuroActionTypes.borrarReaccion,
+  props <{id:number, user_id:number}>()
+);
+
+export const borrarReaccionSuccess = createAction(
+  MuroActionTypes.borrarReaccionSuccess
+);
+
+export const borrarReaccionFail = createAction(
+  MuroActionTypes.borrarReaccionFail,
   props <{payload: any}>()
 );
 

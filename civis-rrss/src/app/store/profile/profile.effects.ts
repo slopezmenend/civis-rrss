@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { BackendService } from 'src/app/services/backend.service';
-import { AuthFail, AuthSuccess, GetProfileFail, GetProfileSuccess, PostFollowFail, PostFollowSuccess, PostUnFollowFail, PostUnFollowSuccess, ProfileActionTypes } from './profile.actions';
+import { AuthFail, AuthSuccess, CompleteUserFail, CompleteUserSuccess, GetProfileFail, GetProfileSuccess, PostFollowFail, PostFollowSuccess, PostUnFollowFail, PostUnFollowSuccess, ProfileActionTypes, UpdateProfileFail, UpdateProfileSuccess } from './profile.actions';
 
 @Injectable()
 export class ProfileEffects {
@@ -45,6 +45,32 @@ export class ProfileEffects {
       .pipe(
         map((data) => AuthSuccess ({ user_id: data.data.id })),
         catchError((data) => of(AuthFail({ payload: data.message})))
+      )
+    )
+  ));
+
+  complete$ = createEffect(() => this.actions$.pipe(
+    ofType(ProfileActionTypes.CompleteUser),
+    mergeMap(({email, name, foto}) => this.backendService.completeUser (email, name, foto)
+      .pipe(
+        map((data) => CompleteUserSuccess ({ user_id: data.data.id })),
+        catchError((data) => of(CompleteUserFail({ payload: data.message})))
+      )
+    )
+  ));
+
+  update$ = createEffect(() => this.actions$.pipe(
+    ofType(ProfileActionTypes.UpdateProfile),
+    mergeMap(({user_id, email, nombre, circunscripcion,
+      partido, grupo, biografia, ideologia,
+      ideologiaadicional, web, facebook,
+      twitter, instagram, youtube}) => this.backendService.updateUser (user_id, email, nombre, circunscripcion,
+        partido, grupo, biografia, ideologia,
+        ideologiaadicional, web, facebook,
+        twitter, instagram, youtube)
+      .pipe(
+        map((data) => UpdateProfileSuccess ()),
+        catchError((data) => of(UpdateProfileFail({ payload: data.message})))
       )
     )
   ));

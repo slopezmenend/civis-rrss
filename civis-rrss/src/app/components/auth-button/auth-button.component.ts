@@ -4,7 +4,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { Store } from '@ngrx/store';
 import { IAppState } from 'src/app/store/AppState';
-import { Auth } from 'src/app/store/profile/profile.actions';
+import { Auth, CompleteUser } from 'src/app/store/profile/profile.actions';
 
 @Component({
   selector: 'app-auth-button',
@@ -17,11 +17,17 @@ export class AuthButtonComponent implements OnInit {
     auth.user$.subscribe (
       value =>
       {
-        if (value?.email != undefined)
+        if (value?.email != undefined )
         {
           let email:string = value?.email;
-          console.log ("Probando a logear al email: ", email);
-          this.store.dispatch(Auth({email}));
+          let name:string = '';
+          if (value?.name != undefined) name = value?.name;
+          let foto:string = '';
+          if (value?.picture != undefined) foto = value?.picture ;
+          console.log ("[Auth-Button]Probando a completar el usuario: ", email, name, foto);
+          this.store.dispatch(CompleteUser({email, name, foto})); //Lanzamos la creación/actualización de datos
+          console.log ("[Auth-Button]Probando a logear al email: ", email);
+          this.store.dispatch(Auth({email})); //Nos logeamos
         }
       }
     );
