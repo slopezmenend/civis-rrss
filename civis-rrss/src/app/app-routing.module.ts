@@ -7,9 +7,9 @@ import { ProfileViewComponent } from './components/profile-view/profile-view.com
 import { SearchListComponent } from './components/searchList/searchlist.component';
 import { TimelineViewComponent } from './components/timeline-view/timeline-view.component';
 import {AuthGuard} from '@auth0/auth0-angular';
-import { FollowerlistComponent } from './followerlist/followerlist.component';
-import { FollowinglistComponent } from './followinglist/followinglist.component';
 import { CommentlistComponent } from './components/commentlist/commentlist.component';
+import { FollowerlistComponent } from './components/followerlist/followerlist.component';
+import { FollowinglistComponent } from './components/followinglist/followinglist.component';
 
 
 

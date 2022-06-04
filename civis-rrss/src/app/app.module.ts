@@ -30,11 +30,11 @@ import { MyprofileViewComponent } from './components/myprofile-view/myprofile-vi
 import { MymuroViewComponent } from './components/mymuro-view/mymuro-view.component';
 import { MurolistComponent } from './components/murolist/murolist.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
-import { FollowinglistComponent } from './followinglist/followinglist.component';
-import { FollowerlistComponent } from './followerlist/followerlist.component';
 import { ComentarformComponent } from './components/comentarform/comentarform.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommentlistComponent } from './components/commentlist/commentlist.component';
+import { FollowerlistComponent } from './components/followerlist/followerlist.component';
+import { FollowinglistComponent } from './components/followinglist/followinglist.component';
 
 @NgModule({
   declarations: [
