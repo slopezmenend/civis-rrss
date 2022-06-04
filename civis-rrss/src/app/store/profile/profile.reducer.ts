@@ -34,34 +34,34 @@ const initialState: IProfileState = {
 
 const _profilereducer = createReducer (
   initialState,
-  on (GetProfileLoad, (state, {user_id}) => ( { ...state , isLoading:true, user_id: user_id})),
+  on (GetProfileLoad, (state, {user_id}) => ( { ...state , isLoading:true})),
   on (GetProfileSuccess, ( state, {data, seguido } ) => (
-    console.log (data, seguido),
+    console.log ("Perfil cargado: ", data, seguido),
     { ...state , isLoading:false, message: 'Perfil cargado correctamente!', data: data, seguido: seguido}),
     ),
   on (GetProfileFail, ( state, {payload} ) => (
     { ...initialState , isLoading:false, message: payload})),
-    on (PostFollow, (state, {user_id, seguidor_id}) => ( { ...state , seguido: true})),
+    on (PostFollow, (state, {user_id}) => ( { ...state , data: {... state.data, follow:true, followers: state.data.followers + 1}})),
     on (PostFollowSuccess, ( state, {data, seguido } ) => (
       console.log (data, seguido),
       { ...state ,  message: 'Follow creado correctamente!', seguido: seguido}),
       ),
       on (PostFollowFail, ( state, {payload} ) => (
       { ...initialState , isLoading:false, message: payload, seguido: false})),
-      on (PostUnFollow, (state, {user_id, seguidor_id}) => ( { ...state , seguido: false})),
+      on (PostUnFollow, (state, {user_id}) => ( { ...state , data: {... state.data, follow:false, followers: state.data.followers - 1}})),
       on (PostUnFollowSuccess, ( state, {data, seguido } ) => (
         console.log (data, seguido),
         { ...state ,  message: 'Follow borrado correctamente!', seguido: seguido}),
         ),
         on (PostUnFollowFail, ( state, {payload} ) => (
         { ...initialState , isLoading:false, message: payload, seguido: true})),
-        on (Auth, (state, {email}) => ( { ...state , user_id:0})),
+        on (Auth, (state, {email}) => ( { ...state})),
         on (AuthSuccess, ( state, {user_id} ) => (
           console.log ("Logueado como: " , user_id),
           { ...state ,  message: 'Usuario logeado correctamente!', user_id: user_id}),
           ),
           on (AuthFail, ( state, {payload} ) => (
-          { ...initialState , isLoading:false, message: payload, seguido: true, user_id: 0 })),
+          { ...initialState , isLoading:false, message: payload, seguido: true })),
           on (CompleteUser, (state, {email, name, foto}) => ( { ...state})),
           on (CompleteUserSuccess, ( state, {user_id} ) => (
             console.log ("Logueado como: " , user_id),
@@ -82,7 +82,7 @@ const _profilereducer = createReducer (
             { ...state ,  message: 'Usuario actualizado correctamente!'}),
             ),
             on (UpdateProfileFail, ( state, {payload} ) => (
-            { ...initialState , isLoading:false, message: payload, seguido: true, user_id: 0 }))
+            { ...initialState , isLoading:false, message: payload, seguido: true }))
 );
 
 export function profilereducer (state:IProfileState = initialState, action: Action): IProfileState

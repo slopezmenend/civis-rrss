@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { crearComentario } from 'src/app/store/muro/muro.actions';
+import { crearComentario } from 'src/app/store/tweets/tweets.actions';
 import { initialTweet, Tweet } from '../../models/Tweet';
 import { IAppState } from '../../store/AppState';
-import { GetTimelineLoad } from '../../store/timeline/timeline.actions';
 
 @Component({
   selector: 'app-comentarform',

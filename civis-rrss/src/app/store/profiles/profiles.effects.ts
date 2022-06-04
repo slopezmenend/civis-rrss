@@ -13,11 +13,11 @@ export class ProfilesEffects {
 
   loadProfiles$ = createEffect(() => this.actions$.pipe(
     ofType(ProfilesActionTypes.SearchProfilesLoad),
-    mergeMap(({pattern, user_id}) => this.backendService.searchUser(pattern, user_id)
+    mergeMap(({pattern}) => this.backendService.searchUser(pattern)
       .pipe(
         map((data) => (
-          console.log ("Datos:", data, data.data.data),
-          SearchProfilesSuccess ({ data: data.data.data}))
+          console.log ("[ProfileEffects]LoadProfile Datos:", data.data),
+          SearchProfilesSuccess ({ data: data.data}))
         ),
         catchError((data) => of(SearchProfilesFail({ payload: data.message})))
         /*map(Timeline => ({ type: TimelineActionTypes.GetTimelineSuccess, payload: Timeline, data: Timeline })),

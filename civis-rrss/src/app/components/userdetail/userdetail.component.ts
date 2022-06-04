@@ -21,12 +21,14 @@ export class UserdetailComponent implements OnInit {
       {
         this.id = profile.user_id;
       });
+      /*console.log ("[UserDetailComponent] Constructor: ", this.profile, this.siguiendo);
+      this.siguiendo = this.profile.follow;*/
   }
 
   ngOnInit(): void {
     //this.siguiendo = this.profile.seguido_id != null;
     //this.siguiendo = this.profile.follows != null;
-    let follows:IFollow[] = this.profile.follows;
+    /*let follows:IFollow[] = this.profile.follows;
 
     if (follows!=null && follows!=undefined)
     follows.forEach (element => {
@@ -34,8 +36,9 @@ export class UserdetailComponent implements OnInit {
     });
     else
       if (this.profile.id == this.id)
-        this.siguiendo = true;
-    console.log ("Pintando el usuario del listado", this.profile, this.siguiendo, this.id, follows);
+        this.siguiendo = true;*/
+
+    console.log ("Pintando el usuario del listado", this.profile, this.siguiendo, this.id);
     console.log("[UserDetail] Profile: ", this.profile);
     console.log("[UserDetail] id: ", this.id);
   }
@@ -50,7 +53,7 @@ export class UserdetailComponent implements OnInit {
       });*/
       if (this.id != 0)
       {
-        this.store.dispatch (PostFollow({ user_id: this.profile.id, seguidor_id: this.id}));
+        this.store.dispatch (PostFollow({ user_id: this.profile.id}));
         this.siguiendo = true;
       }
   }
@@ -66,7 +69,7 @@ export class UserdetailComponent implements OnInit {
       console.log ("[Click Follow] ID: ", this.id);
       if (this.id != 0)
       {
-        this.store.dispatch (PostUnFollow({ user_id: this.profile.id, seguidor_id: this.id}));
+        this.store.dispatch (PostUnFollow({ user_id: this.profile.id}));
         this.siguiendo = false;
       }
   }

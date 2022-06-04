@@ -1,30 +1,44 @@
-/*import { Action, createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import { Tweet } from 'src/app/models/Tweet';
 import { User } from 'src/app/models/User';
 import { IAppState } from '../AppState';
-import { GetMuroLoad, GetMuroSuccess, GetMuroFail, crearComentario, crearComentarioFail, crearComentarioSuccess, añadirComentario, sumarComentario, reaccionar, reaccionarFail, reaccionarSuccess, borrarReaccion, borrarReaccionFail, borrarReaccionSuccess, encantaComentario, odioComentario, disgustaComentario, gustaComentario, igualComentario}  from './muro.actions';
+import { GetTimelineLoad, GetTimelineSuccess, GetTimelineFail, GetMuroLoad, GetMuroSuccess, GetMuroFail, crearComentario, crearComentarioFail, crearComentarioSuccess, añadirComentario, sumarComentario, reaccionar, reaccionarFail, reaccionarSuccess, borrarReaccion, borrarReaccionFail, borrarReaccionSuccess, encantaComentario, odioComentario, disgustaComentario, gustaComentario, igualComentario, GetComentariosLoad, GetComentariosFail, GetComentariosSuccess}  from './tweets.actions';
 
-export const initialMuro:Tweet[] = [];
+export const initialTweets:Tweet[] = [];
 
-export interface IMuroState {
-    user_id: number;
+export interface ITweetsState {
+    //user_id: number;
     data: Tweet[];
     isLoading: boolean;
     page:number;
     message: string;
 }
 
-export const initialState: IMuroState = {
-    user_id: 0,
-    data: initialMuro,
+export const initialState: ITweetsState = {
+    //user_id: 0,
+    data: initialTweets,
     isLoading: false,
     page:1,
     message: ''
 };
 
-const _muroreducer = createReducer (
+const _tweetsreducer = createReducer (
   initialState,
-  on (GetMuroLoad, (state, {user_id, uid}) => ( { ...state , user_id: user_id, isLoading:true, page:state.page+1})),
+  on (GetTimelineLoad, (state, {user_id, page}) => ( { ...state , user_id: user_id, isLoading:true, page: state.page+1})),
+  on (GetTimelineSuccess, ( state, {data} ) => (
+      console.log (data),
+    { ...state , isLoading:false, message: 'Muro cargado correctamente!', data: state.data.concat(data)})
+    ),
+  on (GetTimelineFail, ( state, {payload} ) => (
+    { ...initialState , isLoading:false, message: payload})),
+    on (GetComentariosLoad, (state, {parent_id, page}) => ( { ...state, data:[], isLoading:true, page: state.page+1})),
+    on (GetComentariosSuccess, ( state, {data} ) => (
+        console.log (data),
+      { ...state , isLoading:false, message: 'Comentarios cargados correctamente!', data: state.data.concat(data)})
+      ),
+    on (GetComentariosFail, ( state, {payload} ) => (
+      { ...initialState , isLoading:false, message: payload})),
+  on (GetMuroLoad, (state, {user_id}) => ( { ...state , user_id: user_id, isLoading:true, page:state.page+1})),
   on (GetMuroSuccess, ( state, {data} ) => (
       console.log (data),
     { ...state , isLoading:false, message: 'Muro cargado correctamente!', data: state.data.concat(data)})
@@ -49,93 +63,94 @@ const _muroreducer = createReducer (
       ),
     on (crearComentarioFail, ( state, {payload} ) => (
       { ...initialState , isLoading:false, message: payload})),
-    on (añadirComentario, ( state, {tweet} ) => (
+    /*on (añadirComentario, ( state, {tweet} ) => (
         console.log ("Añadiendo el tweet: ", tweet, state.data),
       { ...state , message: 'Comentario añadido correctamente!', data: [tweet].concat(state.data)}),
       //console.log ("Añadido el tweet: ", state.data),
-      ),
+      ),*/
     on (sumarComentario, ( state, {parent_id} ) => (
       console.log ("Actualizando contador comentarios de post ", parent_id),
     { ...state , message: 'Comentario sumado correctamente!', data: state.data.map (
-      function (comentario) {
-        /*let comm = <Tweet> comentario;
-        console.log ("Pintando elemento", comm, " con ", comm.ncomentarios);
-        comm.ncomentarios = comm.ncomentarios+1;**
-        return comentario;
-        //if (data.id == parent_id) data.ncomentarios = data.ncomentarios + 1; return data;
+      comentario => {
+        let com = {...comentario};
+        if (com.id == parent_id) {
+          com.ncomentarios = com.ncomentarios + 1;
+          console.log ("[Tweets Reducer] Modificado comentario", com);
+        }
+        return com;
       })
     })),
 
     on (encantaComentario, ( state, {id, diff} ) => (
-      console.log ("[Muro Reducer] encantaComentario", id, state.data),
+      console.log ("[Tweets Reducer] encantaComentario", id, state.data),
     { ...state , message: 'Comentario sumado correctamente!', data: state.data.map (
       comentario => {
         let com = {...comentario};
         if (com.id == id) {
           com.encanta = com.encanta + diff;
-          if (diff < 0) com.tipo = 0;
-          else com.tipo = 1;
-          console.log ("[Muro Reducer] Modificado Tipo comentario", com.tipo, diff);
+          if (diff < 0) com.reaccion = 0;
+          else com.reaccion = 1;
+          console.log ("[Tweets Reducer] Modificado comentario", com);
         }
         return com;
       }
     )})),
 
     on (gustaComentario, ( state, {id, diff} ) => (
-      console.log ("[Muro Reducer] gustaComentario", id),
+      console.log ("[Tweets Reducer] gustaComentario", id),
     { ...state , message: 'Comentario sumado correctamente!', data: state.data.map (
       comentario => {
         let com = {...comentario};
         if (com.id == id){
           com.gusta = com.gusta + diff;
-        if (diff < 0) com.tipo = 0;
-        else com.tipo = 2;
-        console.log ("[Muro Reducer] Modificado comentario", com);
+        if (diff < 0) com.reaccion = 0;
+        else com.reaccion = 2;
+        console.log ("[Tweets Reducer] Modificado comentario", com);
       }
         return com;
       }
     )})),
 
     on (igualComentario, ( state, {id, diff} ) => (
-      console.log ("[Muro Reducer] igualComentario", id, state.data),
+      console.log ("[Tweets Reducer] igualComentario", id, state.data),
     { ...state , message: 'Comentario sumado correctamente!', data: state.data.map (
       comentario => {
         let com = {...comentario};
         if (com.id == id) {
           com.igual = com.igual + diff;
-          if (diff < 0) com.tipo = 0;
-          else com.tipo = 3;
-          console.log ("[Muro Reducer] Modificado comentario", com);
+          if (diff < 0) com.reaccion = 0;
+          else com.reaccion = 3;
+          console.log ("[Tweets Reducer] Modificado comentario", com);
         }
         return com;
       }
     )})),
 
     on (disgustaComentario, ( state, {id, diff} ) => (
-      console.log ("[Muro Reducer] disgustaComentario", id),
+      console.log ("[Tweets Reducer] disgustaComentario", id),
     { ...state , message: 'Comentario sumado correctamente!', data: state.data.map (
       comentario => {
         let com = {...comentario};
         if (com.id == id) {
           com.disgusta = com.disgusta + diff;
-          if (diff < 0) com.tipo = 0;
-          else com.tipo = 4;
-          console.log ("[Muro Reducer] Modificado comentario", com);
+          if (diff < 0) com.reaccion = 0;
+          else com.reaccion = 4;
+          console.log ("[Tweets Reducer] Modificado comentario", com);
         }
         return com;
       }
     )})),
 
     on (odioComentario, ( state, {id, diff} ) => (
-      console.log ("[Muro Reducer] odioComentario", id),
+      console.log ("[Tweets Reducer] odioComentario", id),
     { ...state , message: 'Comentario sumado correctamente!', data: state.data.map (
       comentario => {
         let com = {...comentario};
         if (com.id == id) {
           com.odia = com.odia + diff;
-          if (diff < 0) com.tipo = 0;
-          else com.tipo = 5;
-          console.log ("[Muro Reducer] Modificado comentario", com);
+          if (diff < 0) com.reaccion = 0;
+          else com.reaccion = 5;
+          console.log ("[Tweets Reducer] Modificado comentario", com);
         }
 
         return com;
@@ -144,8 +159,7 @@ const _muroreducer = createReducer (
 
 );
 
-export function muroreducer (state:IMuroState = initialState, action: Action): IMuroState
+export function tweetsreducer (state:ITweetsState = initialState, action: Action): ITweetsState
 {
-  return _muroreducer (state, action);
+  return _tweetsreducer (state, action);
 }
-*/

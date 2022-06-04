@@ -29,7 +29,7 @@ const _profilesreducer = createReducer (
     ),
   on (SearchProfilesFail, ( state, {payload} ) => (
     { ...initialState , isLoading:false, message: payload})),
-    on (GetFollowingLoad, (state) => ( { ...state , isLoading:true})),
+    on (GetFollowingLoad, (state, {user_id}) => ( { ...state , isLoading:true})),
     on (GetFollowingSuccess, ( state, {data} ) => (
         console.log ("Estamos en el FollowingSuccess con" , data),
       { ...state , isLoading:false, message: 'Seguidos cargados correctamente!', data: data})

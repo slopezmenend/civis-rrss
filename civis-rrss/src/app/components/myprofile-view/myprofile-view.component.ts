@@ -19,7 +19,7 @@ export class MyprofileViewComponent implements OnInit {
   constructor(private store:Store<IAppState>, private route: ActivatedRoute, public auth: AuthService) {
     this.usuario = initialUser;
 
-    auth.user$.subscribe (
+    /*auth.user$.subscribe (
       value =>
       {
         if (value?.email != undefined)
@@ -29,13 +29,20 @@ export class MyprofileViewComponent implements OnInit {
           this.store.dispatch(Auth({email}));
         }
       }
-    );
+    );*/
 
     this.store.select ('profile').subscribe (profile =>
       {
-        if (this.id != profile.user_id && !this.updated)
+        this.id = profile.user_id;
+        console.log ("[MyProfileComponent] ID:", this.id );
+        if (this.id != 0 && !this.updated)
         {
           this.store.dispatch(GetProfileLoad({user_id: this.id}));
+          this.updated = !this.updated;
+        }
+        /*if (this.id != profile.user_id && !this.updated)
+        {
+          *this.store.dispatch(GetProfileLoad({user_id: this.id}));
           this.updated = !this.updated;
         }
         else
@@ -43,7 +50,7 @@ export class MyprofileViewComponent implements OnInit {
         this.id = profile.user_id;
         this.usuario = profile.data;
         console.log (this.usuario);
-        }
+        }*/
       });
 
      //});

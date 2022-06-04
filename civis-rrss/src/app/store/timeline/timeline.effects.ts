@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+/*import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 //import { Timeline } from 'console';
@@ -21,7 +21,7 @@ export class TimelineEffects {
         ),
         catchError((data) => of(GetTimelineFail({ payload: data.message})))
         /*map(Timeline => ({ type: TimelineActionTypes.GetTimelineSuccess, payload: Timeline, data: Timeline })),
-        catchError((err) => EMPTY)*/
+        catchError((err) => EMPTY)**
       )
     )
   ));
@@ -31,3 +31,4 @@ export class TimelineEffects {
     private backendService: BackendService
   ) {}
 }
+*/

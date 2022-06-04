@@ -1,4 +1,4 @@
-import { Action, createAction, props } from '@ngrx/store';
+/*import { Action, createAction, props } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Tweet } from 'src/app/models/Tweet';
 
@@ -11,7 +11,7 @@ export enum TimelineActionTypes {
 
 /*export class GetTimelineLoad implements Action {
     public readonly type = TimelineActionTypes.GetTimelineLoad;
-}*/
+}**
 
 export const GetTimelineLoad = createAction(
   TimelineActionTypes.GetTimelineLoad,
@@ -57,6 +57,7 @@ export class PostTimelineFail implements Action {
     public readonly type = TimelineActionTypes.PostTimelineFail;
 
     constructor(){} //public error: HttpErrorResponse) { }
-}*/
+}**
 
 //export type TimelineActions = GetTimelineLoad | GetTimelineSuccess | GetTimelineFail;
+*/

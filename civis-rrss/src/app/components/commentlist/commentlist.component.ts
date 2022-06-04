@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { IAppState } from 'src/app/store/AppState';
-import { Tweet } from '../../models/Tweet';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { Auth } from 'src/app/store/profile/profile.actions';
-import { GetTimelineLoad } from 'src/app/store/tweets/tweets.actions';
+import { Store } from '@ngrx/store';
+import { Tweet } from 'src/app/models/Tweet';
+import { IAppState } from 'src/app/store/AppState';
+import { GetComentariosLoad, GetTimelineLoad } from 'src/app/store/tweets/tweets.actions';
 
 @Component({
-  selector: 'app-timeline',
-  templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.scss']
+  selector: 'app-commentlist',
+  templateUrl: './commentlist.component.html',
+  styleUrls: ['./commentlist.component.scss']
 })
-export class TimelineComponent implements OnInit {
+export class CommentlistComponent implements OnInit {
 
   public tweets:Tweet[] = [];
   public len:number = 0;
@@ -22,7 +21,7 @@ export class TimelineComponent implements OnInit {
   private uid:number = 0;
 
   constructor(private store:Store<IAppState>, private route:ActivatedRoute, public auth: AuthService) {
-    console.log ("[TimelineComponent] Cargado muro inicial" , this.tweets);
+    console.log ("[CommentListComponent] Cargados comentarios inicial" , this.tweets);
     /*auth.user$.subscribe (
       value =>
       {
@@ -48,14 +47,7 @@ export class TimelineComponent implements OnInit {
       }
       });
 
-      this.store.select ('profile').subscribe (profile =>
-        {
-          this.id = profile.user_id;
-
-          console.log ("[TimelineComponent] Actualizado el profile con id ", this.id);
-          if (this.id != 0)
-            this.store.dispatch(GetTimelineLoad({user_id: this.id, page:this.page}));
-        });
+      this.loadComentarios ();
 
     //this.route.params.subscribe(params => {
     //    let user_id = +params['id']; // (+) converts string 'id' to a number
@@ -67,19 +59,18 @@ export class TimelineComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loadTimeline ()
+  loadComentarios ()
   {
-    this.store.select ('profile').subscribe (profile =>
-      {
-        let id = profile.data.id;
+    this.route.params.subscribe(params => {
+      this.id = +params['id']; // (+) converts string 'id' to a number
 
-        if (id != 0)
-          this.store.dispatch(GetTimelineLoad({user_id: id, page:this.page}));
-      });
+      console.log ("[ProfileViewComponent] ID: ", this.id, this.page);
+      this.store.dispatch(GetComentariosLoad({parent_id: this.id, page: this.page}));
+   });
   }
 
   onScroll() {
-    this.loadTimeline();
+    this.loadComentarios();
   }
 
 }

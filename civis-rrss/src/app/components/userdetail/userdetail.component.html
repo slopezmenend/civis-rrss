@@ -16,7 +16,7 @@
     </h5>
     <h6 *ngIf="profile.partido != ''" class="card-subtitle mb-2 text-muted">{{profile.partido}}</h6>
     <p class="card-text">{{profile.biografia}}</p>
-    <button *ngIf="!siguiendo" (click)="onFollowClick()" class="btn btn-primary">Follow</button>
-    <button *ngIf="siguiendo" (click)="onUnFollowClick()" class="btn btn-primary">UnFollow</button>
+    <button *ngIf="!profile.follow" (click)="onFollowClick()" class="btn btn-primary">Follow</button>
+    <button *ngIf="profile.follow" (click)="onUnFollowClick()" class="btn btn-primary">UnFollow</button>
   </div>
 </div>

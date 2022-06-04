@@ -22,7 +22,7 @@ export enum ProfilesActionTypes {
 
 export const SearchProfilesLoad = createAction(
   ProfilesActionTypes.SearchProfilesLoad,
-  props <{pattern:string, user_id:number}>()
+  props <{pattern:string}>()
 );
 
 export const SearchProfilesSuccess = createAction(

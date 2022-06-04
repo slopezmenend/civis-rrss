@@ -23,10 +23,10 @@ export class MuroViewComponent implements OnInit {
         this.usuario = profile.data;
         console.log (this.usuario);
       });
-      this.route.params.subscribe(params => {
+      /**this.route.params.subscribe(params => {
         this.id = +params['id']; // (+) converts string 'id' to a number
-        this.store.dispatch(GetProfileLoad({user_id: this.id}));
-     });
+        *this.store.dispatch(GetProfileLoad({user_id: this.id}));
+     });**/
   }
 
 

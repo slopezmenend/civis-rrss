@@ -31,10 +31,11 @@
 
 
 <div class="d-flex justify-content-center text-center fs-5">
-  <button *ngIf="!seguido" class="mr-1 btn btn-outline-secondary" (click)="onFollowClick()" title="Seguir al usuario">
+  <button *ngIf="!usuario.follow" class="mr-1 btn btn-outline-secondary" (click)="onFollowClick()"
+    title="Seguir al usuario">
     Seguir
   </button>
-  <button *ngIf="seguido" class="mr-1 btn btn-outline-secondary" (click)="onUnFollowClick()"
+  <button *ngIf="usuario.follow" class="mr-1 btn btn-outline-secondary" (click)="onUnFollowClick()"
     title="Dejar de seguir al usuario">
     Dejar de seguir
   </button>

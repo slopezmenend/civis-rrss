@@ -3,9 +3,9 @@ import { Store } from '@ngrx/store';
 import { IAppState } from 'src/app/store/AppState';
 import { Tweet } from '../../models/Tweet';
 import { ActivatedRoute } from '@angular/router';
-import { GetMuroLoad } from 'src/app/store/muro/muro.actions';
 import { AuthService } from '@auth0/auth0-angular';
 import { Auth } from 'src/app/store/profile/profile.actions';
+import { GetMuroLoad } from 'src/app/store/tweets/tweets.actions';
 
 @Component({
   selector: 'app-murolist',
@@ -19,18 +19,18 @@ export class MurolistComponent implements OnInit {
   public id:number = 0;
   public page:number=0;
   public cargando:boolean=false;
+  private uid:number = 0;
 
   constructor(public auth: AuthService, private store:Store<IAppState>) {
 
-    console.log ("Cargado muro inicial para el id " ,this.id, this.tweets);
-    this.store.select ('muro').subscribe (muro =>
+    console.log ("[MuroListComponent] Cargando Muro: " ,this.id, this.tweets);
+    this.store.select ('tweets').subscribe (tweets =>
       {
-        console.log (muro);
-        this.tweets = muro.data;
+        this.tweets = tweets.data;
         this.len = this.tweets.length;
-        this.cargando = muro.isLoading;
-        this.page = muro.page;
-        console.log ("Recuperados tweets del muro: ", this.tweets);
+        this.cargando = tweets.isLoading;
+        this.page = tweets.page;
+        console.log ("[MuroListComponent] Recuperados tweets del muro: ", this.tweets);
       });
 
     //this.route.params.subscribe(params => {
@@ -41,7 +41,6 @@ export class MurolistComponent implements OnInit {
         {
         this.id = profile.data.id;
         this.page = 0;
-        console.log ("En el muro, el campo id tiene valor" , this.id);
         this.getMuro();
         }
       });
@@ -54,8 +53,7 @@ export class MurolistComponent implements OnInit {
   }
 
    ngOnChanges() {
-      console.log ("llamando al get muro desde ngChanges")  ;
-      this.getMuro();
+      //this.getMuro();
     }
 
   getMuro ()

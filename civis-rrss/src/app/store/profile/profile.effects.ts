@@ -21,7 +21,7 @@ export class ProfileEffects {
 
   follow$ = createEffect(() => this.actions$.pipe(
     ofType(ProfileActionTypes.PostFollow),
-    mergeMap(({user_id, seguidor_id}) => this.backendService.postFollow(user_id, seguidor_id)
+    mergeMap(({user_id, seguidor_id}) => this.backendService.postFollow(user_id)
       .pipe(
         map((data) => PostFollowSuccess ({ data: data.data, seguido: true })),
         catchError((data) => of(PostFollowFail({ payload: data.message})))
@@ -31,7 +31,7 @@ export class ProfileEffects {
 
   unfollow$ = createEffect(() => this.actions$.pipe(
     ofType(ProfileActionTypes.PostUnFollow),
-    mergeMap(({user_id, seguidor_id}) => this.backendService.deleteFollow(user_id, seguidor_id)
+    mergeMap(({user_id, seguidor_id}) => this.backendService.deleteFollow(user_id)
       .pipe(
         map((data) => PostUnFollowSuccess ({ data: data.data, seguido: false })),
         catchError((data) => of(PostUnFollowFail({ payload: data.message})))

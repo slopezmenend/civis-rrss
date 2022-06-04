@@ -40,7 +40,7 @@ export const GetProfileFail = createAction(
 
 export const PostFollow = createAction(
   ProfileActionTypes.PostFollow,
-  props < {user_id: number, seguidor_id:number }>()
+  props < {user_id: number}>()
 );
 
 export const PostFollowSuccess = createAction(
@@ -55,7 +55,7 @@ export const PostFollowFail = createAction(
 
 export const PostUnFollow = createAction(
   ProfileActionTypes.PostUnFollow,
-  props < {user_id: number, seguidor_id: number}>()
+  props < {user_id: number}>()
 );
 
 export const PostUnFollowSuccess = createAction(

@@ -17,6 +17,8 @@ export class ProfileFormViewComponent implements OnInit {
   public usuario:User;
   public edit:boolean = false;
   private user_id:number=0;
+  private id:number=0;
+
   //private lanza:boolean=true;
   public nombre:FormControl = new FormControl ();
   public circunscripcion:FormControl = new FormControl ();
@@ -36,7 +38,7 @@ export class ProfileFormViewComponent implements OnInit {
   constructor(private store:Store<IAppState>, public auth: AuthService) {
     this.usuario = initialUser;
 
-    auth.user$.subscribe (
+    /*auth.user$.subscribe (
       value =>
       {
         if (value?.email != undefined)
@@ -46,42 +48,46 @@ export class ProfileFormViewComponent implements OnInit {
           this.store.dispatch(Auth({email}));
         }
       }
-    );
+    );*/
 
     this.store.select ('profile').subscribe (profile =>
     {
-      this.user_id = profile.user_id;
+      /*this.user_id = profile.user_id;
       if (this.user_id != 0)
       {
         if (profile.data.id != 0)
-        {
-          console.log ("[ProfileForm] Profile: ", profile);
+        {*/
+        console.log ("[ProfileFormViewComponent] IDs:", profile.data.id, profile.user_id);
+        //this.edit = profile.data.id == profile.user_id;
+        this.id = profile.data.id;
+        this.user_id = profile.user_id;
+          console.log ("[ProfileFormViewComponent] Profile: ", profile);
           this.usuario = profile.data;
           this.formInit();
 
-          if (this.usuario.id == this.user_id) this.edit = true;
+         /* if (this.usuario.id == this.user_id) this.edit = true;
           console.log(this.edit);
           console.log (profile);
           console.log (this.usuario);
         }
         else
         {
-          console.log ("Lanzamos el GetProfile al estar el id a 0 con ", this.user_id, this.lanza);
+          /*console.log ("Lanzamos el GetProfile al estar el id a 0 con ", this.user_id, this.lanza);
           if (this.lanza)
           {
             this.lanza = !this.lanza;
-            this.store.dispatch(GetProfileLoad({user_id: this.user_id}));
-          }
+            *this.store.dispatch(GetProfileLoad({user_id: this.usuario.id}));
+          }**
         }
       }
-      else console.log ("El profile form no actuliaza al no tener user_id");
+      else console.log ("El profile form no actuliaza al no tener user_id");*/
       });
 
-    if (this.user_id != 0)
+    /**if (this.user_id != 0 && !this.cargando)
     {
       this.cargando = true;
-      this.store.dispatch(GetProfileLoad({user_id: this.user_id}));
-    }
+      *this.store.dispatch(GetProfileLoad({user_id: this.usuario.id}));
+    }**/
 
   }
 
@@ -95,14 +101,14 @@ export class ProfileFormViewComponent implements OnInit {
     //console.log ("[Profile-Form] Tendría que poner el nombre a solo lectura", this.edit, this.usuario.id , this.user_id);
     if (!enable)
     {
-      //console.log ("Pongo el campo como readonly");
+      console.log ("Pongo el campo como readonly");
       f.disable ({onlySelf:true});
     }
   }
 
   formInit ()
   {
-    this.edit = this.usuario.id == this.user_id;
+    this.edit = this.id == this.user_id;
 
     console.log ("[ProfileForm] Incializando el Form");
     this.manageFormControl (this.nombre, this.usuario.nombre, this.edit);
@@ -110,9 +116,7 @@ export class ProfileFormViewComponent implements OnInit {
     this.manageFormControl (this.partido, this.usuario.partido, this.edit);
     this.manageFormControl (this.grupo, this.usuario.grupo, this.edit);
     this.manageFormControl (this.biografia, this.usuario.biografia, this.edit);
-    console.log("[ProfileForm] Ideologia: ", this.usuario.ideologia);
     this.manageFormControl (this.ideologia, this.usuario.ideologia, this.edit);
-    console.log("[ProfileForm] Ideologia Form: ", this.ideologia.value);
     this.manageFormControl (this.ideologiaadicional, this.usuario.ideologiaadicional, this.edit);
     this.manageFormControl (this.web, this.usuario.web, this.edit);
     this.manageFormControl (this.facebook, this.usuario.facebook, this.edit);

@@ -9,6 +9,7 @@ import { TimelineViewComponent } from './components/timeline-view/timeline-view.
 import {AuthGuard} from '@auth0/auth0-angular';
 import { FollowerlistComponent } from './followerlist/followerlist.component';
 import { FollowinglistComponent } from './followinglist/followinglist.component';
+import { CommentlistComponent } from './components/commentlist/commentlist.component';
 
 
 
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'search', component: SearchListComponent, canActivate: [AuthGuard]},
   { path: 'following/:id', component: FollowinglistComponent, canActivate: [AuthGuard]},
   { path: 'followers/:id', component: FollowerlistComponent, canActivate: [AuthGuard]},
+  { path: 'comments/:id', component: CommentlistComponent, canActivate: [AuthGuard] },
   { path: 'welcome', component: TimelineViewComponent},
   { path: '**', component: TimelineViewComponent},
 ]

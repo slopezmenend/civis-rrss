@@ -21,7 +21,9 @@ export interface User {
   biografia: string;
   ideologia: number;
   ideologiaadicional: number;
-  follows: IFollow|any;
+  created_at: string,
+  updated_at: string,
+  follow: boolean;
   /*created_at: string,
   updated_at: string,
   seguido_id: number|null,
@@ -49,7 +51,9 @@ export const initialUser:User =
   biografia: '',
   ideologia: 0,
   ideologiaadicional: 0,
-  follows:null
+  created_at: '',
+  updated_at: '',
+  follow:false
   /*created_at: '',
   updated_at: '',
   seguido_id: 0,
@@ -61,7 +65,7 @@ export interface IUser {
   message: any
 }
 
-export interface IprofileList {
+/*export interface IprofileList {
   current_page: number
   data: User[],
   first_page_url: string
@@ -75,8 +79,9 @@ export interface IprofileList {
   prev_page_url: any,
   to: any,
   total: number,
-}
+}*/
 export interface IProfiles {
-  data: IprofileList,
+  data: User[],
+  //data: IprofileList,
   message: any,
 }

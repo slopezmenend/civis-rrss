@@ -30,9 +30,9 @@ export class ProfileSideViewComponent implements OnInit {
               this.seguido = true;
           });
         }*/
-        this.seguido = this.usuario.follows != null;//profile.seguido;
+        //this.seguido = this.usuario.follow;
         console.log ("[Panel Lateral] Usuario: ", this.usuario);
-        console.log ("[Panel Lateral] Seguido: ", this.seguido);
+        //console.log ("[Panel Lateral] Seguido: ", this.seguido);
         console.log ("[Panel Lateral] Profile: ", profile);
     });
     //this.store.dispatch(GetProfileLoad());
@@ -43,12 +43,12 @@ export class ProfileSideViewComponent implements OnInit {
 
   onFollowClick ()
   {
-    this.store.dispatch (PostFollow({ user_id: this.usuario.id, seguidor_id: this.user_id}));
+    this.store.dispatch (PostFollow({ user_id: this.usuario.id}));
   }
 
   onUnFollowClick ()
   {
-    this.store.dispatch (PostUnFollow({ user_id: this.usuario.id, seguidor_id: this.user_id}));
+    this.store.dispatch (PostUnFollow({ user_id: this.usuario.id}));
   }
 
 }

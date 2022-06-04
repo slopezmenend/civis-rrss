@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+/*import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 //import { Timeline } from 'console';
@@ -13,7 +13,7 @@ export class MuroEffects {
 
   loadMuro$ = createEffect(() => this.actions$.pipe(
     ofType(MuroActionTypes.GetMuroLoad),
-    mergeMap(({user_id, page}) => this.backendService.getMuro(user_id, page)
+    mergeMap(({user_id, page, uid}) => this.backendService.getMuro(user_id, page, uid)
       .pipe(
         map((data) => (
           console.log ("Datos:", data, data.data.data),
@@ -66,3 +66,4 @@ export class MuroEffects {
     private backendService: BackendService
   ) {}
 }
+*/

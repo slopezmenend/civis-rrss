@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 // Import the AuthService type from the SDK
 import { AuthService } from '@auth0/auth0-angular';
 import { Store } from '@ngrx/store';
+import { BackendService } from 'src/app/services/backend.service';
 import { IAppState } from 'src/app/store/AppState';
 import { Auth, CompleteUser } from 'src/app/store/profile/profile.actions';
 
@@ -13,7 +14,7 @@ import { Auth, CompleteUser } from 'src/app/store/profile/profile.actions';
 })
 export class AuthButtonComponent implements OnInit {
 
-  constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService, private store:Store<IAppState>) {
+  constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService, private store:Store<IAppState>, private backendService: BackendService) {
     auth.user$.subscribe (
       value =>
       {

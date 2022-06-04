@@ -1,4 +1,4 @@
-import { Action, createAction, props } from '@ngrx/store';
+/*import { Action, createAction, props } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Tweet } from 'src/app/models/Tweet';
 
@@ -26,7 +26,7 @@ export enum MuroActionTypes {
 
 export const GetMuroLoad = createAction(
   MuroActionTypes.GetMuroLoad,
-  props <{user_id:number, page:number}>()
+  props <{user_id:number, page:number, uid:number}>()
 );
 
 export const GetMuroSuccess = createAction(
@@ -116,3 +116,4 @@ export const odioComentario = createAction(
   props < {id:number, diff: number}>()
 );
 
+*/

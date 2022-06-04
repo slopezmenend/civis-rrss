@@ -34,6 +34,7 @@ import { FollowinglistComponent } from './followinglist/followinglist.component'
 import { FollowerlistComponent } from './followerlist/followerlist.component';
 import { ComentarformComponent } from './components/comentarform/comentarform.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommentlistComponent } from './components/commentlist/commentlist.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FollowinglistComponent,
     FollowerlistComponent,
     ComentarformComponent,
+    CommentlistComponent,
 
   ],
   imports: [
