@@ -14,8 +14,8 @@ import { sumarComentario } from '../store/tweets/tweets.actions';
   providedIn: 'root'
 })
 export class BackendService {
-  //private baseUrL:string = 'https://civis-rrss-backend.herokuapp.com/';
-  private baseUrL:string = 'http://127.0.0.1:8000/';
+  private baseUrL:string = 'https://civis-rrss-backend.herokuapp.com/';
+  //private baseUrL:string = 'http://127.0.0.1:8000/';
   private uid:number=0;//361;
 
   constructor(private http: HttpClient, private store:Store<IAppState>) { }

@@ -66,8 +66,12 @@ import { FollowinglistComponent } from './components/followinglist/followinglist
     AppRoutingModule,
     // Import the module into the application, with configuration
     AuthModule.forRoot({
-      domain: 'dev-3knlgbm1.us.auth0.com',
-      clientId: 'tUwbY67kocLQxV4vjBinKwZnfA2yky6j'
+      //desarrollo local
+      /*domain: 'dev-3knlgbm1.us.auth0.com',
+      clientId: 'tUwbY67kocLQxV4vjBinKwZnfA2yky6j'*/
+      //producción
+      domain: 'dev-4v3p1zga.us.auth0.com',
+      clientId: 'pT27i5gB8SB1jmZFPl09mq954xnsVuH2'
     }),
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot(EffectsArray),
