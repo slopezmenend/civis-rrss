@@ -26,8 +26,7 @@ export class BackendService {
 
   public getPerfil ($user_id:number): Observable<IUser>
   {
-    let url = this.baseUrL + 'api/profile/' + $user_id+'/';
-    if (this.uid!=0) url = url + this.uid + '/';
+    let url = this.baseUrL + 'api/profile/' + $user_id+'/'+ this.uid + '/'
     console.log ("[Backend Service] Llamando a URL: " ,  url, this.uid);
     let perfil = this.http.get(url);
     console.log("[Backend Service] Perfil: ", perfil);
@@ -47,8 +46,7 @@ export class BackendService {
 
   public getMuro ($user_id:number, $page:number): Observable<ITweet>
   {
-    let url = this.baseUrL + 'api/muro/' + $user_id+'/';
-    if (this.uid!=0) url = url + this.uid + '/';
+    let url = this.baseUrL + 'api/muro/' + $user_id+'/'+ this.uid + '/';
     if ($page != 0)
       url = url + '?page=' + $page;
     console.log ("vamos a recuperar muro de " ,  url);
@@ -59,8 +57,7 @@ export class BackendService {
 
   public searchUser ($pattern:string): Observable<IProfiles>
   {
-    let url = this.baseUrL + 'api/searchuser/' + $pattern+ '/';
-    if (this.uid!=0) url = url + this.uid + '/';
+    let url = this.baseUrL + 'api/searchuser/' + $pattern+ '/'+ this.uid + '/';
     console.log ("Buscamos profiles de " ,  url, this.uid);
     let profiles = this.http.get(url);
     console.log(profiles);
@@ -69,8 +66,7 @@ export class BackendService {
 
   public getTimeline ($user_id:number, $page:number): Observable<ITweet>
   {
-    let url = this.baseUrL + 'api/timeline/' + $user_id + '/';
-    if (this.uid!=0) url = url + this.uid + '/';
+    let url = this.baseUrL + 'api/timeline/' + $user_id + '/'+ this.uid + '/';
     if ($page != 0)
       url = url + '?page=' + $page;
     console.log ("vamos a recuperar muro de " ,  url);
@@ -104,8 +100,7 @@ export class BackendService {
 
   public getFollowing ($user_id:number): Observable<IFollows>
   {
-    let url = this.baseUrL + 'api/seguidos/' + $user_id + '/';
-    if (this.uid!=0) url = url + this.uid + '/';
+    let url = this.baseUrL + 'api/seguidos/' + $user_id + '/'+ this.uid + '/';
     console.log ("Buscamos profiles de following" ,  url);
     let profiles = this.http.get(url);
     console.log(profiles);
@@ -114,8 +109,7 @@ export class BackendService {
 
   public getFollowers ($user_id:number): Observable<IFollows>
   {
-    let url = this.baseUrL + 'api/siguiendo/' + $user_id+'/';
-    if (this.uid!=0) url = url + this.uid + '/';
+    let url = this.baseUrL + 'api/siguiendo/' + $user_id+'/'+ this.uid + '/';
     console.log ("Buscamos profiles de followers" ,  url);
     let profiles = this.http.get(url);
     console.log(profiles);
