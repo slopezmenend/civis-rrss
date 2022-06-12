@@ -16,7 +16,7 @@ import { sumarComentario } from '../store/tweets/tweets.actions';
 export class BackendService {
   private baseUrL:string = 'https://civis-rrss-backend.herokuapp.com/';
   //private baseUrL:string = 'http://127.0.0.1:8000/';
-  private uid:number=3581;//361;3581;
+  private uid:number=0;//361;3581;
 
   constructor(private http: HttpClient, private store:Store<IAppState>) { }
 
@@ -26,7 +26,7 @@ export class BackendService {
 
   public getPerfil ($user_id:number): Observable<IUser>
   {
-    let url = this.baseUrL + 'api/profile/' + $user_id+'/'+ this.uid + '/'
+    let url = this.baseUrL + 'api/profile/' + $user_id+'/'+ this.uid;
     console.log ("[Backend Service] Llamando a URL: " ,  url, this.uid);
     let perfil = this.http.get(url);
     console.log("[Backend Service] Perfil: ", perfil);
@@ -35,7 +35,7 @@ export class BackendService {
 
   public getComentarios ($parent_id:number, $page:number): Observable<ITweet>
   {
-    let url = this.baseUrL + 'api/comentario/' + $parent_id+'/'+ this.uid + '/';;
+    let url = this.baseUrL + 'api/comentario/' + $parent_id+'/'+ this.uid;
     if ($page != 0)
       url = url + '?page=' + $page;
     console.log ("vamos a recuperar comentarios de " ,  url);
@@ -46,7 +46,7 @@ export class BackendService {
 
   public getMuro ($user_id:number, $page:number): Observable<ITweet>
   {
-    let url = this.baseUrL + 'api/muro/' + $user_id+'/'+ this.uid + '/';
+    let url = this.baseUrL + 'api/muro/' + $user_id+'/'+ this.uid;
     if ($page != 0)
       url = url + '?page=' + $page;
     console.log ("vamos a recuperar muro de " ,  url);
@@ -57,7 +57,7 @@ export class BackendService {
 
   public searchUser ($pattern:string): Observable<IProfiles>
   {
-    let url = this.baseUrL + 'api/searchuser/' + $pattern+ '/'+ this.uid + '/';
+    let url = this.baseUrL + 'api/searchuser/' + $pattern+ '/'+ this.uid;
     console.log ("Buscamos profiles de " ,  url, this.uid);
     let profiles = this.http.get(url);
     console.log(profiles);
@@ -66,7 +66,7 @@ export class BackendService {
 
   public getTimeline ($user_id:number, $page:number): Observable<ITweet>
   {
-    let url = this.baseUrL + 'api/timeline/' + $user_id + '/'+ this.uid + '/';
+    let url = this.baseUrL + 'api/timeline/' + $user_id + '/'+ this.uid;
     if ($page != 0)
       url = url + '?page=' + $page;
     console.log ("vamos a recuperar muro de " ,  url);
@@ -77,7 +77,7 @@ export class BackendService {
 
   public postFollow ($user_id:number): Observable<IUser>
   {
-    const url = this.baseUrL + 'api/postfollow/'+ $user_id +'/' + this.uid + '/';
+    const url = this.baseUrL + 'api/postfollow/'+ $user_id +'/' + this.uid;
     console.log ("Vamos a crear el follow con " + url);
     this.http.post<any>(url,
       { seguido_id : $user_id, seguidor_id: this.uid }).subscribe(data => {
@@ -88,7 +88,7 @@ export class BackendService {
 
   public deleteFollow ($user_id:number)
   {
-    const url = this.baseUrL + 'api/deletefollow/'+ $user_id +'/' + this.uid + '/';
+    const url = this.baseUrL + 'api/deletefollow/'+ $user_id +'/' + this.uid;
     console.log ("Vamos a borrar el follow con " + url);
     let $result = this.http.delete<any>(url);
     $result.subscribe(data => {
@@ -100,7 +100,7 @@ export class BackendService {
 
   public getFollowing ($user_id:number): Observable<IFollows>
   {
-    let url = this.baseUrL + 'api/seguidos/' + $user_id + '/'+ this.uid + '/';
+    let url = this.baseUrL + 'api/seguidos/' + $user_id + '/'+ this.uid;
     console.log ("Buscamos profiles de following" ,  url);
     let profiles = this.http.get(url);
     console.log(profiles);
@@ -109,7 +109,7 @@ export class BackendService {
 
   public getFollowers ($user_id:number): Observable<IFollows>
   {
-    let url = this.baseUrL + 'api/siguiendo/' + $user_id+'/'+ this.uid + '/';
+    let url = this.baseUrL + 'api/siguiendo/' + $user_id+'/'+ this.uid;
     console.log ("Buscamos profiles de followers" ,  url);
     let profiles = this.http.get(url);
     console.log(profiles);
