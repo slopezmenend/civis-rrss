@@ -227,7 +227,7 @@ export class BackendService {
     public reaccionar(id: number, user_id:number , reaccion:number): Observable<any>
     {
       console.log ("[BackendService] Reaccionar: ", id, user_id, reaccion);
-      const url = this.baseUrL + 'api/crearReaccion/';
+      const url = this.baseUrL + 'api/crearReaccion';
       console.log ("Vamos a crear la reaccion con " + url);
       this.http.post<any>(url,
         { id : id, user_id: user_id, reaccion: reaccion }).subscribe(data => {
@@ -239,7 +239,7 @@ export class BackendService {
     public borrarReaccion(id: number, user_id:number): Observable<any>
     {
       console.log ("[BackendService] borrarReaccion: ", id, user_id);
-      const url = this.baseUrL + 'api/borrarReaccion/';
+      const url = this.baseUrL + 'api/borrarReaccion';
       console.log ("Vamos a borrar la reaccion con " + url);
       this.http.post<any>(url,
         { id : id, user_id: user_id }).subscribe(data => {
