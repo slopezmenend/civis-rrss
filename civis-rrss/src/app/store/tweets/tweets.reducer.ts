@@ -38,7 +38,9 @@ const _tweetsreducer = createReducer (
       ),
     on (GetComentariosFail, ( state, {payload} ) => (
       { ...initialState , isLoading:false, message: payload})),
-  on (GetMuroLoad, (state, {user_id}) => ( { ...state , user_id: user_id, isLoading:true, page:state.page+1})),
+  on (GetMuroLoad, (state, {user_id}) => ( { ...state , user_id: user_id, isLoading:true, page:state.page+1, data: state.data.filter (
+    element =>  { return element.parent_id == null; }
+  ) })),
   on (GetMuroSuccess, ( state, {data} ) => (
       console.log (data),
     { ...state , isLoading:false, message: 'Muro cargado correctamente!', data: state.data.concat(data)})
