@@ -5,7 +5,7 @@ import { Tweet } from '../../models/Tweet';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { Auth } from 'src/app/store/profile/profile.actions';
-import { GetTimelineLoad } from 'src/app/store/tweets/tweets.actions';
+import { GetTimelineLoad, InitTweetList } from 'src/app/store/tweets/tweets.actions';
 
 @Component({
   selector: 'app-timeline',
@@ -23,6 +23,7 @@ export class TimelineComponent implements OnInit {
 
   constructor(private store:Store<IAppState>, private route:ActivatedRoute, public auth: AuthService) {
     console.log ("[TimelineComponent] Cargado muro inicial" , this.tweets);
+    this.store.dispatch (InitTweetList());
     /*auth.user$.subscribe (
       value =>
       {

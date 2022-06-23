@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { Tweet } from 'src/app/models/Tweet';
 import { User } from 'src/app/models/User';
 import { IAppState } from '../AppState';
-import { GetTimelineLoad, GetTimelineSuccess, GetTimelineFail, GetMuroLoad, GetMuroSuccess, GetMuroFail, crearComentario, crearComentarioFail, crearComentarioSuccess, añadirComentario, sumarComentario, reaccionar, reaccionarFail, reaccionarSuccess, borrarReaccion, borrarReaccionFail, borrarReaccionSuccess, encantaComentario, odioComentario, disgustaComentario, gustaComentario, igualComentario, GetComentariosLoad, GetComentariosFail, GetComentariosSuccess}  from './tweets.actions';
+import { InitTweetList, GetTimelineLoad, GetTimelineSuccess, GetTimelineFail, GetMuroLoad, GetMuroSuccess, GetMuroFail, crearComentario, crearComentarioFail, crearComentarioSuccess, añadirComentario, sumarComentario, reaccionar, reaccionarFail, reaccionarSuccess, borrarReaccion, borrarReaccionFail, borrarReaccionSuccess, encantaComentario, odioComentario, disgustaComentario, gustaComentario, igualComentario, GetComentariosLoad, GetComentariosFail, GetComentariosSuccess}  from './tweets.actions';
 
 export const initialTweets:Tweet[] = [];
 
@@ -24,6 +24,7 @@ export const initialState: ITweetsState = {
 
 const _tweetsreducer = createReducer (
   initialState,
+  on (InitTweetList , (state) => ( { ...state , data:[]})),
   on (GetTimelineLoad, (state, {user_id, page}) => ( { ...state , user_id: user_id, isLoading:true, page: state.page+1})),
   on (GetTimelineSuccess, ( state, {data} ) => (
       console.log (data),

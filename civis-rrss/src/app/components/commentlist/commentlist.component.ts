@@ -4,7 +4,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { Store } from '@ngrx/store';
 import { Tweet } from 'src/app/models/Tweet';
 import { IAppState } from 'src/app/store/AppState';
-import { GetComentariosLoad, GetTimelineLoad } from 'src/app/store/tweets/tweets.actions';
+import { GetComentariosLoad, GetTimelineLoad, InitTweetList } from 'src/app/store/tweets/tweets.actions';
 
 @Component({
   selector: 'app-commentlist',
@@ -22,6 +22,7 @@ export class CommentlistComponent implements OnInit {
 
   constructor(private store:Store<IAppState>, private route:ActivatedRoute, public auth: AuthService) {
     console.log ("[CommentListComponent] Cargados comentarios inicial" , this.tweets);
+    this.store.dispatch (InitTweetList());
     /*auth.user$.subscribe (
       value =>
       {

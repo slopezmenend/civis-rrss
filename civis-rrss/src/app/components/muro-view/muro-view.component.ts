@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IAppState } from 'src/app/store/AppState';
 import { GetProfileLoad } from 'src/app/store/profile/profile.actions';
+import { InitTweetList } from 'src/app/store/tweets/tweets.actions';
 import { initialUser, User } from '../../models/User';
 
 
@@ -17,6 +18,7 @@ export class MuroViewComponent implements OnInit {
 
   constructor(private store:Store<IAppState>, private route: ActivatedRoute) {
     console.log ("Entrando en el muro");
+    this.store.dispatch (InitTweetList());
     this.usuario = initialUser;
     this.store.select ('profile').subscribe (profile =>
       {

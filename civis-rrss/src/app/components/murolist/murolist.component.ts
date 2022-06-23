@@ -5,7 +5,7 @@ import { Tweet } from '../../models/Tweet';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { Auth } from 'src/app/store/profile/profile.actions';
-import { GetMuroLoad } from 'src/app/store/tweets/tweets.actions';
+import { GetMuroLoad, InitTweetList } from 'src/app/store/tweets/tweets.actions';
 
 @Component({
   selector: 'app-murolist',
@@ -24,6 +24,7 @@ export class MurolistComponent implements OnInit {
   constructor(public auth: AuthService, private store:Store<IAppState>) {
 
     console.log ("[MuroListComponent] Cargando Muro: " ,this.id, this.tweets);
+    this.store.dispatch (InitTweetList());
     this.store.select ('tweets').subscribe (tweets =>
       {
         this.tweets = tweets.data;

@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Tweet } from 'src/app/models/Tweet';
 
 export enum TweetsActionTypes {
+    InitTweetList = '[Tweets] Init TweetList',
     GetTimelineLoad = '[Tweets] Get Timeline',
     GetTimelineSuccess = '[Tweets] Get Timeline Success',
     GetTimelineFail = '[Tweets] Get Timeline Fail',
@@ -29,6 +30,11 @@ export enum TweetsActionTypes {
     disgustaComentario = '[Tweets] disgusta Comentario',
     odioComentario = '[Tweets] Odio Comentario',
  }
+
+
+ export const InitTweetList = createAction(
+  TweetsActionTypes.InitTweetList
+);
 
  export const GetTimelineLoad = createAction(
   TweetsActionTypes.GetTimelineLoad,
